@@ -10,6 +10,10 @@ public class User {
             phone = "",
             email = "";
 
+    private static final String
+            regex_phone = "\\(\\d{2}\\)\\d{5}-\\d{4}",
+            regex_email = "\\w+@\\w+\\.\\w+\\.*\\w*" ;
+
     //==================================================================================================================
     // Build
     //==================================================================================================================
@@ -44,16 +48,21 @@ public class User {
 
     public void set_phone(String phone) throws Existing_phone,Invalid_format{
         if(/*Query.exist(SQL.TABLE_USER,SQL.COLUMN_PHONE,phone)*/false ) throw new Existing_phone();
-        else if(!phone.matches("\\(\\d{2}\\)\\d{5}-\\d{4}")) throw new Invalid_format();
+        else if(!is_phone(phone)) throw new Invalid_format();
 
         this.phone=phone;
     }
 
     public void set_email(String email) throws Existing_email,Invalid_format{
         if(/*Query.exist(SQL.TABLE_USER,SQL.COLUMN_EMAIL,email)*/false ) throw new Existing_email();
-        else if(!email.matches("\\w+@\\w+\\.\\w+\\.*\\w*")) throw new Invalid_format();
+        else if(!is_email(email)) throw new Invalid_format();
 
         this.email=email;
     }
+    //==================================================================================================================
+    // Tools
+    //==================================================================================================================
+    public static boolean is_phone(String phone){ return phone.matches(regex_phone); }
 
+    public static boolean is_email(String email){ return email.matches(regex_email); }
 }

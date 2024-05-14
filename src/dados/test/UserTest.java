@@ -13,65 +13,17 @@ class UserTest {
     }
 
     @org.junit.jupiter.api.Test
-    void set_phone() {
-        User user = new User();
-        try{
-            user.set_phone("(31)98105-9465");
-        }
-        catch (User.Invalid_format e){
-            System.out.println(e.msg());
-            Assertions.fail();
-        }
-        catch (User.Existing_phone e){
-            System.out.println(e.msg());
-            Assertions.fail();
-        }
-
-        try{ user.set_phone("(31)8105-9465"); }
-        catch (User.Invalid_format e){ Assertions.assertTrue(true); }
-        catch (User.Existing_phone e){ Assertions.fail(); }
-
-        try{ user.set_phone("(3B)A8105-9465"); }
-        catch (User.Invalid_format e){ Assertions.assertTrue(true); }
-        catch (User.Existing_phone e){ Assertions.fail(); }
-
+    void is_phone() {
+        Assertions.assertTrue(User.is_phone("(31)98105-9465"),"Número correto.");
+        Assertions.assertFalse(User.is_phone("(31)8105-9465"),"Número incompleto.");
+        Assertions.assertFalse(User.is_phone("(3A)A105-9465"),"Número errado.");
     }
 
     @org.junit.jupiter.api.Test
-    void set_email() {
-        User user = new User();
-        try{
-            user.set_email("ragnifico@yahoo.com.br");
-        }
-        catch (User.Invalid_format e){
-            System.out.println(e.msg());
-            Assertions.fail();
-        }
-        catch (User.Existing_email e){
-            System.out.println(e.msg());
-            Assertions.fail();
-        }
-
-        try{
-            user.set_email("ragnifico@hotmail.com");
-        }
-        catch (User.Invalid_format e){
-            System.out.println(e.msg());
-            Assertions.fail();
-        }
-        catch (User.Existing_email e){
-            System.out.println(e.msg());
-            Assertions.fail();
-        }
-
-        try{ user.set_email("ragnifico@@yahoo.com.br"); }
-        catch (User.Invalid_format e){ Assertions.assertTrue(true); }
-        catch (User.Existing_email e){ Assertions.fail(); }
-
-        try{ user.set_email("ragnifico@yahoo."); }
-        catch (User.Invalid_format e){ Assertions.assertTrue(true); }
-        catch (User.Existing_email e){ Assertions.fail(); }
-
-
+    void is_email() {
+        Assertions.assertTrue(User.is_email("ragnifico@yahoo.com.br"),"Email pessoal.");
+        Assertions.assertTrue(User.is_email("mabtoy@gmail.com"),"email profissional");
+        Assertions.assertFalse(User.is_email("ragnifico@@yahoo.com.br"),"Erro @@.");
+        Assertions.assertFalse(User.is_email("ragnifico@yahoo."),"Erro de email incompleto.");
     }
 }
