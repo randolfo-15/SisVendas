@@ -1,3 +1,5 @@
+import dados.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -78,8 +80,7 @@ public class LoginForm extends JDialog {
                 user.name = resultSet.getString("name");
                 user.email = resultSet.getString("email");
                 user.phone = resultSet.getString("phone");
-                user.address = resultSet.getString("address");
-                user.password = resultSet.getString("password");
+                user.passw = resultSet.getString("password");
             }
 
             stmt.close();
@@ -102,7 +103,6 @@ public class LoginForm extends JDialog {
             System.out.println("Sucessful Authentication: " + user.name);
             System.out.println("Email: " + user.email);
             System.out.println("Phone: " + user.phone);
-            System.out.println("Addres: " + user.address);
 
         }
         else{
