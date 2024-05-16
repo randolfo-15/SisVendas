@@ -1,5 +1,8 @@
 package dados;
 
+import bank.Query;
+import bank.SQL;
+
 public class User {
     //==================================================================================================================
     // Field
@@ -53,7 +56,7 @@ public class User {
     }
 
     public void set_uname(String uname) throws Existing_name {
-        if(/*Query.exist(SQL.TABLE_USER,SQL.COLUMN_UNAME,uname)*/false ) throw new Existing_name();
+        if(Query.exist(SQL.TABLE_USER, SQL.COLUNM_NAME,uname)) throw new Existing_name();
 
         this.uname=uname;
     }

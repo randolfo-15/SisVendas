@@ -10,6 +10,17 @@ class UserTest {
     @org.junit.jupiter.api.Test
     void set_uname() {
 
+        try{
+
+            User pablo = new User();
+            pablo.set_uname("Pablo Rangel");
+
+        }catch (User.Existing_name e){
+
+            Assertions.assertTrue(false);
+            System.out.println(e.msg());
+
+        }
     }
 
     @org.junit.jupiter.api.Test
