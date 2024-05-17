@@ -46,7 +46,6 @@ public class Query {
 
     //Método de busca no banco por ID
     public static void buscaPorId(){
-
         int idToFetch = 1; // ID do elemento que você deseja buscar
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
@@ -89,6 +88,156 @@ public class Query {
             System.err.println("Erro de conexão: " + e.getMessage());
         }
     }
+
+    //Método busrcar por uname
+    public static void buscaPorUname(){
+        String Uname = "";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM exemplo WHERE uname = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, Uname);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "exemplo" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Uname " + Uname + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+    //Método busrcar por phone
+    public static void buscaPorPhone(){
+
+        String Phone = "";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM exemplo WHERE phone = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, Phone);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "exemplo" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Phone " + Phone + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+    //Método busrcar por Email
+    public static void buscaPorEmail(){
+
+        String Email = "";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM exemplo WHERE email = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, Email);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "exemplo" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Email " + Email + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
 
     //Método para atualizar o elemento no Banco de dados
     public static void updateElemento(){
