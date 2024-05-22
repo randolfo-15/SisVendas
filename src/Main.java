@@ -1,6 +1,6 @@
-import Manager.Program;
-import Pages.LoginForm;
-import Pages.PDV1;
+import bank.Query;
+import bank.SQL;
+import dados.User;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -8,8 +8,17 @@ import Pages.PDV1;
 public class Main {
     public static void main(String[] args) {
 
-        //new LoginForm(null);
-        //new PDV1(null);
-        Program.start();
+        User user = new User();
+        Query.search(SQL.TABLE_USER,SQL.COLUMN_NAME,"Randolfo",user);
+        System.out.println(
+                (
+                    "Nome: "+user.get_name()+"\n"+
+                    "Phone: "+user.get_phone()+"\n"+
+                    "Email: "+user.get_email()+"\n"
+                )
+        );
+
+        //Program.start();
+
     }
 }

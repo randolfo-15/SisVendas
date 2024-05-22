@@ -30,12 +30,23 @@ public class User implements Archivable {
 
     @Override
     public void read(ResultSet result) throws SQLException {
-        name  = result.getString  (  SQL.COLUNM_NAME  );
-        uname = result.getString  (  SQL.COLUNM_UNAME );
-        phone = result.getString  (  SQL.COLUNM_PHONE );
-        email = result.getString  (  SQL.COLUNM_EMAIL );
-        passw = result.getString  (  SQL.COLUNM_PASSW );
+        name  = result.getString  (  SQL.COLUMN_NAME);
+        uname = result.getString  (  SQL.COLUMN_UNAME);
+        phone = result.getString  (  SQL.COLUMN_PHONE);
+        email = result.getString  (  SQL.COLUMN_EMAIL);
+        passw = result.getString  (  SQL.COLUMN_PASSW);
         adm   = result.getBoolean (  SQL.COLUMN_ADM   );
+    }
+
+    @Override
+    public String edit() {
+        return
+            SQL.COLUMN_NAME +"'"+name+"',"+
+            SQL.COLUMN_NAME +"'"+uname+"',"+
+            SQL.COLUMN_NAME +"'"+phone+"',"+
+            SQL.COLUMN_NAME +"'"+email+"',"+
+            SQL.COLUMN_NAME +"'"+passw+"',"+
+            SQL.COLUMN_ADM+"'"+((adm)?1:0)+"'";
     }
 
     //==================================================================================================================
@@ -69,7 +80,7 @@ public class User implements Archivable {
     }
 
     public void set_uname(String uname) throws Existing_name {
-        if(/*Query.exist(SQL.TABLE_USER, SQL.COLUNM_NAME,uname*/false) throw new Existing_name();
+        if(/*Query.exist(SQL.TABLE_USER, SQL.COLUMN_NAME,uname*/false) throw new Existing_name();
 
         this.uname=uname;
     }

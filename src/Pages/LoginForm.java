@@ -1,7 +1,6 @@
 package Pages;
 
 import dados.User;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -70,8 +69,11 @@ public class LoginForm extends JDialog {
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME,PASSWORD);
 
             Statement stmt = conn.createStatement();
+
+
             String sql = "SELECT * FROM users WHERE email=? AND password=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
 
@@ -89,8 +91,8 @@ public class LoginForm extends JDialog {
             conn.close();
 
         }catch (Exception e){
-
-            e.printStackTrace();
+            System.out.println("Erro");
+            //e.printStackTrace();
 
         }
 

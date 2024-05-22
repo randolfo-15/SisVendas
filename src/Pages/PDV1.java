@@ -34,7 +34,7 @@ public class PDV1 extends JDialog{
 
         String a = textField1.getText();
 
-        String resultado = Query.buscaPorId(a);
+        String resultado = "";//Query.buscaPorId(a);
 
         if(resultado != null){
 

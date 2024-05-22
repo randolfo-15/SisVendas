@@ -121,9 +121,9 @@ public class Person extends Catalog {
             group.add(btn);
 
             switch (btn.getText()){
-                case NAME:  action_radio_search(btn, SQL.COLUNM_NAME ,field,info);  break;
-                case EMAIL: action_radio_search(btn, SQL.COLUNM_EMAIL,field,info);  break;
-                case PHONE: action_radio_search(btn, SQL.COLUNM_PHONE,field,info);  break;
+                case NAME:  action_radio_search(btn, SQL.COLUMN_NAME,field,info);  break;
+                case EMAIL: action_radio_search(btn, SQL.COLUMN_EMAIL,field,info);  break;
+                case PHONE: action_radio_search(btn, SQL.COLUMN_PHONE,field,info);  break;
             }
         }
         return pnl;
@@ -134,7 +134,7 @@ public class Person extends Catalog {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                Query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(user));
             }
         });
@@ -508,9 +508,9 @@ public class Person extends Catalog {
             group.add(btn);
 
             switch (btn.getText()){
-                case NAME:  action_radio_update(btn, SQL.COLUNM_NAME ,field,info);  break;
-                case EMAIL: action_radio_update(btn, SQL.COLUNM_EMAIL,field,info);  break;
-                case PHONE: action_radio_update(btn, SQL.COLUNM_PHONE,field,info);  break;
+                case NAME:  action_radio_update(btn, SQL.COLUMN_NAME,field,info);  break;
+                case EMAIL: action_radio_update(btn, SQL.COLUMN_EMAIL,field,info);  break;
+                case PHONE: action_radio_update(btn, SQL.COLUMN_PHONE,field,info);  break;
             }
         }
         return pnl;
@@ -521,7 +521,7 @@ public class Person extends Catalog {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                Query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(user));
             }
         });
@@ -575,9 +575,9 @@ public class Person extends Catalog {
             group.add(btn);
 
             switch (btn.getText()){
-                case NAME:  action_radio_delete(btn, SQL.COLUNM_NAME ,field,info);  break;
-                case EMAIL: action_radio_delete(btn, SQL.COLUNM_EMAIL,field,info);  break;
-                case PHONE: action_radio_delete(btn, SQL.COLUNM_PHONE,field,info);  break;
+                case NAME:  action_radio_delete(btn, SQL.COLUMN_NAME,field,info);  break;
+                case EMAIL: action_radio_delete(btn, SQL.COLUMN_EMAIL,field,info);  break;
+                case PHONE: action_radio_delete(btn, SQL.COLUMN_PHONE,field,info);  break;
             }
         }
         return pnl;
@@ -588,12 +588,12 @@ public class Person extends Catalog {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                Query.select(SQL.TABLE_USER,column,field.getText(),user);
 
                 info.setText(make_table_data(user));
                 if(!user.get_passw().isEmpty()){
                     int option = JOptionPane.showConfirmDialog((null),("Deseja excluir"+user.get_name()),(""),JOptionPane.YES_NO_OPTION);
-                    if(option==JOptionPane.YES_OPTION) Query.deletarRegistro();
+                    if(option==JOptionPane.YES_OPTION) ;//Query.deletarRegistro();
                 }
             }
         });

@@ -25,11 +25,16 @@ public class Product implements Archivable {
 
     @Override
     public void read(ResultSet result) throws SQLException {
-        name  = result.getString (  SQL.COLUNM_NAME      );
+        name  = result.getString (  SQL.COLUMN_NAME);
         ctry  = result.getString (  SQL.COLUMN_CATEGORY  );
         code  = result.getString (  SQL.COLUMN_CODE      );
         value  = result.getFloat (  SQL.COLUMN_VALUE     );
         amount  = result.getInt  (  SQL.COLUMN_AMOUNT    );
+    }
+
+    @Override
+    public String edit() {
+        return "";
     }
 
     //==================================================================================================================

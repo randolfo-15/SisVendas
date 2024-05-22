@@ -122,8 +122,8 @@ public class Item extends Catalog{
             group.add(btn);
 
             switch (btn.getText()){
-                case NAME: action_radio_search(btn, SQL.COLUNM_NAME ,field,info);  break;
-                case CODE: action_radio_search(btn, SQL.COLUNM_EMAIL,field,info);  break;
+                case NAME: action_radio_search(btn, SQL.COLUMN_NAME,field,info);  break;
+                case CODE: action_radio_search(btn, SQL.COLUMN_EMAIL,field,info);  break;
 
             }
         }
@@ -135,7 +135,7 @@ public class Item extends Catalog{
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                Query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(prd));
             }
         });
@@ -385,8 +385,8 @@ public class Item extends Catalog{
             group.add(btn);
 
             switch (btn.getText()){
-                case NAME: action_radio_delete(btn, SQL.COLUNM_NAME ,field,info);  break;
-                case CODE: action_radio_delete(btn, SQL.COLUNM_EMAIL,field,info);  break;
+                case NAME: action_radio_delete(btn, SQL.COLUMN_NAME,field,info);  break;
+                case CODE: action_radio_delete(btn, SQL.COLUMN_EMAIL,field,info);  break;
 
             }
         }
@@ -398,11 +398,11 @@ public class Item extends Catalog{
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                Query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(prd));
                 if(!user.get_passw().isEmpty()) {
                     int option = JOptionPane.showConfirmDialog((null), ("Deseja excluir" + prd.get_name()), (""), JOptionPane.YES_NO_OPTION);
-                    if (option == JOptionPane.YES_OPTION) Query.deletarRegistro();
+                    if (option == JOptionPane.YES_OPTION) ;//Query.deletarRegistro();
                 }
             }
         });
