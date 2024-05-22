@@ -56,4 +56,18 @@ public class Query{
             conn.close();
         }catch (SQLException ignored){}
     }
+
+    public static void insert(String table,Archivable arq){
+        try {
+            String
+                column = arq.write()[Archivable.COLUMN],
+                value  = arq.write()[Archivable.VALUES];
+            String query = "INSERT INTO "+table+" ("+column+") VALUES ("+value+");";
+            Connection conn = DriverManager.getConnection(SQL.URL);
+            PreparedStatement pstt = conn.prepareStatement(query);
+            pstt.executeUpdate();
+            conn.close();
+        }catch (SQLException ignored){}
+    }
+
 }

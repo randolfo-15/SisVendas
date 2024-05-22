@@ -49,6 +49,27 @@ public class User implements Archivable {
             SQL.COLUMN_ADM+"'"+((adm)?1:0)+"'";
     }
 
+    @Override
+    public String[] write() {
+        String column =
+            SQL.COLUMN_NAME +","+
+            SQL.COLUMN_NAME +","+
+            SQL.COLUMN_NAME +","+
+            SQL.COLUMN_NAME +","+
+            SQL.COLUMN_NAME +","+
+            SQL.COLUMN_ADM;
+
+        String values =
+            "'"+name+"',"+
+            "'"+uname+"',"+
+            "'"+phone+"',"+
+            "'"+email+"',"+
+            "'"+passw+"',"+
+            "'"+((adm)?1:0)+"'";
+
+        return new String[]{column,values};
+    }
+
     //==================================================================================================================
     // Exceptions class
     //==================================================================================================================
