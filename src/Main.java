@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         User user = new User();
-        Query.search(SQL.TABLE_USER,SQL.COLUMN_NAME,"Randolfo",user);
+        Query.select(SQL.TABLE_USER,SQL.COLUMN_NAME,"Randolfo",user);
         System.out.println(
                 (
                     "Nome: "+user.get_name()+"\n"+
