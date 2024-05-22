@@ -3,6 +3,8 @@ package dados;
 import bank.Query;
 import bank.SQL;
 
+import java.sql.ResultSet;
+
 public class User {
     //==================================================================================================================
     // Field
@@ -80,4 +82,18 @@ public class User {
     public static boolean is_phone(String phone){ return phone.matches(regex_phone); }
 
     public static boolean is_email(String email){ return email.matches(regex_email); }
+
+    public static User fill(ResultSet resultSet){
+        User user = new User();
+        try{
+            user.name = resultSet.getString("nome");
+            user.uname = resultSet.getString("uname");
+            user.email = resultSet.getString("email");
+            user.passw = resultSet.getString("passw");
+
+        } catch (Exception e){
+
+        }
+        return user;
+    }
 }
