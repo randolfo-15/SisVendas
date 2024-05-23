@@ -34,8 +34,8 @@ public class Program {
 
     public static void start(){
         for (var panel:page) sys.add(panel);
-        //login();
-        user = get_user_test();
+        // login();
+        //user = get_user_test();
         sys.call(page[MENU].ID);
     }
 

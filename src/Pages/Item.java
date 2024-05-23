@@ -1,3 +1,10 @@
+/*****************************************************************************
+ *   Item
+ *  ========
+ *  @file  : Item.java
+ *  @author: Randolfo A Goncalves
+ *  @since : 28/05/24
+ ****************************************************************************/
 package Pages;
 
 import Manager.Graph;
@@ -134,52 +141,50 @@ public class Item extends Catalog{
         });
     }
 
-
-    //------------------------------------------------------------------------------------------------------------------
-
+    //==================================================================================================================
+    //  Register user
+    //==================================================================================================================
     private void init_page_new(){
-
         JTextField
-                nome = make_textfield(40) ,
-                username = make_textfield(40),
-                email = make_textfield(40),
-                phone = make_textfield(40);
-        JPasswordField
-                senha1 = make_text_passw(),
-                senha2 = make_text_passw();
+                nome = make_textfield(37),
+                code = make_textfield(15),
+                ctry = make_textfield(15),
+                value = make_textfield(20),
+                amount = make_textfield(10);
 
-
-        JPanel pnl_00 = new JPanel(new GridLayout(8,2));
-        pnl_00.setPreferredSize(new Dimension(700,300));
+        JPanel pnl_00 = new JPanel(new GridLayout(5,1));
         pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
 
+        pnl_00.add(make_text("Novo Produto"));
 
-        pnl_00.add(make_text("Nome"));
-        pnl_00.add(nome);
+        JPanel pnl_01 = create_panel();
+        pnl_01.add(make_text("Nome"));
+        pnl_01.add(nome);
+        pnl_00.add(pnl_01);
 
-        pnl_00.add(make_text("Username"));
-        pnl_00.add(username);
+        JPanel pnl_02 = create_panel();
+        pnl_02.add(make_text("Code"));
+        pnl_02.add(code);
+        pnl_02.add(make_text("Categoria"));
+        pnl_02.add(ctry);
+        pnl_00.add(pnl_02);
 
-        pnl_00.add(make_text("Email"));
-        pnl_00.add(email);
+        JPanel pnl_03 = create_panel();
+        pnl_03.add(make_text("Valor"));
+        pnl_03.add(value);
+        pnl_03.add(make_text("Qtd"));
+        pnl_03.add(amount);
+        pnl_00.add(pnl_03);
 
-        pnl_00.add(make_text("Phone"));
-        pnl_00.add(phone);
-
-        pnl_00.add(make_text("Senha"));
-        pnl_00.add(senha1);
-
-        pnl_00.add(make_text("Confirma"));
-        pnl_00.add(senha2);
-        pnl_00.add(new Label());
-        pnl_00.add(new Label());
-
-        JPanel pnl_02 = new JPanel(),pnl_03 = new JPanel();
+        JPanel pnl_07 = create_panel();
         JButton salvar = new JButton("Salvar"),
                 cancelar = new JButton("Limpar");
 
-        pnl_02.add(salvar);
-        pnl_03.add(cancelar);
+        pnl_07.add(salvar);
+        pnl_07.add(Box.createHorizontalStrut(60));
+        pnl_07.add(cancelar);
+        pnl_00.add(pnl_07);
+
 
         salvar.addActionListener(new ActionListener() {
             @Override
@@ -192,80 +197,107 @@ public class Item extends Catalog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 nome.setText("");
-                username.setText("");
-                email.setText("");
-                phone.setText("");
-                senha1.setText("");
-                senha2.setText("");
+                ctry.setText("");
+                code.setText("");
+                value.setText("");
+                amount.setText("");
             }
+
         });
 
-        pnl_00.add(pnl_02);
-        pnl_00.add(pnl_03);
-
-        page[NEW].add(pnl_00);
-
+        page[NEW].setLayout(new BorderLayout());
+        page[NEW].add(Box.createVerticalStrut(150),BorderLayout.NORTH);
+        page[NEW].add(Box.createHorizontalStrut(300),BorderLayout.WEST);
+        page[NEW].add(pnl_00,BorderLayout.CENTER);
+        page[NEW].add(Box.createHorizontalStrut(300),BorderLayout.EAST);
+        page[NEW].add(Box.createVerticalStrut(200),BorderLayout.SOUTH);
     }
 
+    private JPanel create_panel(){
+        JPanel pnl = new JPanel();
+        pnl.setBorder(BorderFactory.createRaisedBevelBorder());
+        return pnl;
+    }
+
+    private JPanel make_text(String text){
+        JLabel label = new JLabel(text);
+        label.setForeground(Color.BLACK);
+        label.setFont(new Font("Serif",Font.BOLD,18));
+        JPanel pnl = new JPanel();
+        pnl.setPreferredSize(new Dimension(120,32));
+        pnl.setBorder(BorderFactory.createLoweredBevelBorder());
+        pnl.add(label);
+        return pnl;
+    }
+
+    private JTextField make_textfield(int value){
+        JTextField in = new JTextField(value);
+        in.setFont(new Font("Serif",Font.BOLD,18));
+        in.setBorder(BorderFactory.createLoweredBevelBorder());
+        return in;
+    }
+
+    //==================================================================================================================
+    // Editar
+    //==================================================================================================================
     private void init_page_edit(){
-        JTextField field = make_textfield();
-        //page[EDIT].setLayout(new BoxLayout(page[EDIT],BoxLayout.Y_AXIS));
+        page[EDIT].setLayout(new BorderLayout());
+
+        JLabel info = Sys.make_text("",30,Color.BLACK);
+        ButtonGroup group = new ButtonGroup();
+        JTextField field = search_field(group,info);
+
 
         // Campo de busca
         // ===============
-        JPanel pnl_02    = new JPanel();
-        pnl_02.add(new JLabel(new ImageIcon("src/imagens/lupa.png")));
-        pnl_02.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
-        pnl_02.add(field);
-        pnl_02.add(make_radio_search());
-        pnl_02.setBorder(BorderFactory.createRaisedBevelBorder());
+        JPanel pnl_00_00 = new JPanel();
+        pnl_00_00.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        // Campo de Resultado
-        // ===================
-        JPanel pnl_03    = new Graph("bkg2.jpg")    ;
-        pnl_03.setBorder(BorderFactory.createRaisedBevelBorder());
-        //----------------------------------------------------------------
+        pnl_00_00.add(new JLabel(new ImageIcon((Graph.PATH_IMG+"lupa.png"))));
+        pnl_00_00.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
+        pnl_00_00.add(field);
+        pnl_00_00.add(make_radio_search(group,field,info));
+
         JTextField
-                nome = make_textfield(40) ,
-                username = make_textfield(40),
-                email = make_textfield(40),
-                phone = make_textfield(40);
-        JPasswordField
-                senha1 = make_text_passw(),
-                senha2 = make_text_passw();
+                nome = make_textfield(37),
+                code = make_textfield(15),
+                ctry = make_textfield(15),
+                value = make_textfield(20),
+                amount = make_textfield(10);
 
-
-        JPanel pnl_00 = new JPanel(new GridLayout(8,2));
-        pnl_00.setPreferredSize(new Dimension(700,300));
+        JPanel pnl_00 = new JPanel(new GridLayout(5,1));
         pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
 
+        pnl_00.add(make_text("Editar Produto"));
 
-        pnl_00.add(make_text("Nome"));
-        pnl_00.add(nome);
+        JPanel pnl_01 = create_panel();
+        pnl_01.add(make_text("Nome"));
+        pnl_01.add(nome);
+        pnl_00.add(pnl_01);
 
-        pnl_00.add(make_text("Username"));
-        pnl_00.add(username);
+        JPanel pnl_02 = create_panel();
+        pnl_02.add(make_text("Code"));
+        pnl_02.add(code);
+        pnl_02.add(make_text("Categoria"));
+        pnl_02.add(ctry);
+        pnl_00.add(pnl_02);
 
-        pnl_00.add(make_text("Email"));
-        pnl_00.add(email);
+        JPanel pnl_03 = create_panel();
+        pnl_03.add(make_text("Valor"));
+        pnl_03.add(value);
+        pnl_03.add(make_text("Qtd"));
+        pnl_03.add(amount);
+        pnl_00.add(pnl_03);
 
-        pnl_00.add(make_text("Phone"));
-        pnl_00.add(phone);
-
-        pnl_00.add(make_text("Senha"));
-        pnl_00.add(senha1);
-
-        pnl_00.add(make_text("Confirma"));
-        pnl_00.add(senha2);
-        pnl_00.add(new Label());
-        pnl_00.add(new Label());
-
-        JPanel pnl_04 = new JPanel(),pnl_05 = new JPanel();
+        JPanel pnl_07 = create_panel();
         JButton salvar = new JButton("Salvar"),
                 cancelar = new JButton("Limpar");
 
-        pnl_04.add(salvar);
-        pnl_05.add(cancelar);
+        pnl_07.add(salvar);
+        pnl_07.add(Box.createHorizontalStrut(60));
+        pnl_07.add(cancelar);
+        pnl_00.add(pnl_07);
+
 
         salvar.addActionListener(new ActionListener() {
             @Override
@@ -278,51 +310,102 @@ public class Item extends Catalog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 nome.setText("");
-                username.setText("");
-                email.setText("");
-                phone.setText("");
-                senha1.setText("");
-                senha2.setText("");
+                ctry.setText("");
+                code.setText("");
+                value.setText("");
+                amount.setText("");
             }
+
         });
 
-        pnl_00.add(pnl_04);
-        pnl_00.add(pnl_05);
 
-        //-----------------------------------------------------------------
+        // Campo de Resultado
+        // ===================
+        //JPanel pnl_01 = new Graph(BKG_00);
+        //pnl_01.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        //pnl_01.add(info);
+
+
+        JPanel edition = new JPanel();
+        edition.setBackground(new Color(0,0,0,0));
+        edition.setLayout(new BoxLayout(edition,BoxLayout.Y_AXIS));
+        edition.add(Box.createHorizontalStrut(110));
+        edition.add(pnl_00);
+
         // Plugs
         // =====
-        page[EDIT].add(pnl_02);
-        page[EDIT].add(pnl_03);
-        page[EDIT].add(pnl_00);
+        page[EDIT].add(pnl_00_00,BorderLayout.NORTH);
+        page[EDIT].add(Box.createHorizontalStrut(300),BorderLayout.WEST);
+        page[EDIT].add(edition,BorderLayout.CENTER);
+        page[EDIT].add(Box.createHorizontalStrut(300),BorderLayout.EAST);
+        page[EDIT].add(Box.createVerticalStrut(200),BorderLayout.SOUTH);
     }
 
     private void init_page_del(){
-        JTextField field = make_textfield();
-        JLabel info = Sys.make_text(make_table_data(new Product()),30,Color.BLACK);
-        page[DEL].setLayout(new BoxLayout(page[DEL],BoxLayout.Y_AXIS));
+        page[DEL].setLayout(new BorderLayout());
+
+        JLabel info = Sys.make_text("",30,Color.BLACK);
+        ButtonGroup group = new ButtonGroup();
+        JTextField field = search_field(group,info);
+
 
         // Campo de busca
         // ===============
-        JPanel pnl_00    = new JPanel();
-        pnl_00.add(new JLabel(new ImageIcon("src/imagens/lupa.png")));
+        JPanel pnl_00 = new JPanel();
+        pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        pnl_00.add(new JLabel(new ImageIcon((Graph.PATH_IMG+"lupa.png"))));
         pnl_00.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
         pnl_00.add(field);
-        pnl_00.add(make_radio_search());
-
-        pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
+        pnl_00.add(make_radio_delete(group,field,info));
 
         // Campo de Resultado
         // ===================
-        JPanel pnl_01    = new Graph("bkg2.jpg")    ;
+        JPanel pnl_01 = new Graph(BKG_00);
         pnl_01.setBorder(BorderFactory.createRaisedBevelBorder());
+
         pnl_01.add(info);
-        pnl_01.add(new JButton("Delete"));
 
         // Plugs
         // =====
-        page[DEL].add(pnl_00);
-        page[DEL].add(pnl_01);
+        page[DEL].add(pnl_00,BorderLayout.NORTH);
+        page[DEL].add(pnl_01,BorderLayout.CENTER);
+    }
+
+    private JPanel make_radio_delete(ButtonGroup group,JTextField field,JLabel info){
+        JPanel pnl = new JPanel();
+        JRadioButton[] radio = new JRadioButton[]{
+                new JRadioButton(NAME),
+                new JRadioButton(CODE),
+        };
+        for(var btn : radio) {
+            Sys.make_component(btn);
+            pnl.add(btn);
+            group.add(btn);
+
+            switch (btn.getText()){
+                case NAME: action_radio_delete(btn, SQL.COLUNM_NAME ,field,info);  break;
+                case CODE: action_radio_delete(btn, SQL.COLUNM_EMAIL,field,info);  break;
+
+            }
+        }
+        return pnl;
+    }
+
+    void action_radio_delete(JRadioButton btn,String column,JTextField field,JLabel info){
+        Product prd = new Product();
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                info.setText(make_table_data(prd));
+                if(!user.get_passw().isEmpty()) {
+                    int option = JOptionPane.showConfirmDialog((null), ("Deseja excluir" + prd.get_name()), (""), JOptionPane.YES_NO_OPTION);
+                    if (option == JOptionPane.YES_OPTION) Query.deletarRegistro();
+                }
+            }
+        });
     }
 
     //==================================================================================================================
@@ -344,21 +427,6 @@ public class Item extends Catalog{
         return in;
     }
 
-    private JPanel make_text(String text){
-        JLabel label = new JLabel(text);
-        label.setForeground(Color.BLACK);
-        label.setFont(new Font("Serif",Font.BOLD,18));
-        JPanel pnl = new JPanel();
-        pnl.setBorder(BorderFactory.createRaisedBevelBorder());
-        pnl.add(label);
-        return pnl;
-    }
-
-    private JTextField make_textfield(int value){
-        JTextField in = new JTextField(value);
-        in.setFont(new Font("Serif",Font.BOLD,18));
-        return in;
-    }
 
     private JPasswordField make_text_passw(){
         JPasswordField in = new JPasswordField(40);

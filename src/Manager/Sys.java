@@ -317,6 +317,7 @@ public class Sys extends JFrame {
             // ===========
             zone.add(zone_work,BorderLayout.CENTER);
             zone.add(zone_close,BorderLayout.LINE_END);
+            zone.add(Box.createHorizontalStrut(55),BorderLayout.WEST);
             JPanel pnl = new JPanel();
             pnl.add(make_text(ID,32,frg1));
             pnl.setBackground(new Color(0,0,0,0));
