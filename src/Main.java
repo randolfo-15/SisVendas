@@ -1,9 +1,14 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import Manager.Sys;
+import Pages.Menu;
+
+
 public class Main {
     public static void main(String[] args) {
 
-        //new LoginForm(null);
-        new PDV1(null);
+        Sys sys = new Sys();
+        Menu menu = new Menu();
+
+        sys.add(menu);
+        sys.call(menu.ID);
     }
 }
