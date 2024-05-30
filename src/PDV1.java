@@ -6,19 +6,13 @@ import java.awt.event.ActionListener;
 
 public class PDV1 extends JDialog{
     private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
     private JRadioButton dinheiroRadioButton;
-    private JRadioButton cartãoDeCréditoRadioButton;
-    private JRadioButton cartãoDeDébitoRadioButton;
+    private JRadioButton créditoRadioButton;
+    private JRadioButton débitoRadioButton;
     private JRadioButton PIXRadioButton;
-    private JRadioButton cartãoAlimentaçãoRadioButton;
-    private JRadioButton cartãoRefeiçãoRadioButton;
     private JButton finalizarCompraButton;
-    private JButton cliqueParaSomarButton;
     private JButton addButton;
     private JPanel PDV1;
-    private JTextField textField4;
 
 
     public PDV1(JFrame parent){
