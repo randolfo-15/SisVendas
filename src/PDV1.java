@@ -1,3 +1,6 @@
+import bank.Query;
+import bank.Query1;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +28,11 @@ public class PDV1 extends JDialog{
         setMinimumSize(new Dimension(450,474));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
+
+        String a = textField1.getText();
+
+        String resultado = Query1.buscaPorId(a);
+
 
 
 

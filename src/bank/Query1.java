@@ -1,7 +1,5 @@
 package bank;
 
-import dados.User;
-
 import java.sql.*;
 
 public class Query1 <T> {
@@ -9,7 +7,7 @@ public class Query1 <T> {
 
     Connection connection;
 
-    Query1() { try {
+    public Query1() { try {
 
         connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
 
@@ -71,7 +69,7 @@ public class Query1 <T> {
     }
 
     //Método de busca no banco por ID
-    public static void buscaPorId(){
+    public static String buscaPorId(String a){
         int idToFetch = 1; // ID do elemento que você deseja buscar
 
         try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
@@ -113,6 +111,7 @@ public class Query1 <T> {
         } catch (SQLException e) {
             System.err.println("Erro de conexão: " + e.getMessage());
         }
+        return null;
     }
 
     //Método busrcar por uname
