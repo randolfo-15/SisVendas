@@ -10,6 +10,8 @@ package Manager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
@@ -34,10 +36,9 @@ public class Sys extends JFrame {
     // Style
     // ======
     public static  final Color
-            bkg1 = new Color(100,100,100),
             frg1 = new Color(255,255,255),
-            bkg2 = new Color(60,60,60),
-            frg2 = new Color(255,255,255);
+            bkg = new Color(60,60,60),
+            frg2 = new Color(200,200,200);
 
 
     // Components
@@ -48,14 +49,20 @@ public class Sys extends JFrame {
     //private Map<String,Panel> display = new HashMap<String,Panel>();           //<  Display
     public static final int size_btn = 5;
 
-    private final JMenu[] btn = new JMenu[size_btn];
+    private final JButton[] btn = new JButton[size_btn];
     private final String[]  image_btn = new String[]{
             "add_user.png",
             "add_product.png",
             "pdv.png",
             "info.png",
-            "grafic2.gif"
+            "graphic.gif"
     };
+
+    public static final int ADD_USER    = 0;
+    public static final int ADD_PRODUCT = 1;
+    public static final int PDV         = 2;
+    public static final int INFO        = 3;
+    public static final int DATA        = 4;
     //==================================================================================================================
     // Startups
     //==================================================================================================================
@@ -63,7 +70,7 @@ public class Sys extends JFrame {
         init_frame();
         init_component();
         init_display();
-
+        actions_btns();
         setVisible(true);
     }
 
@@ -82,9 +89,9 @@ public class Sys extends JFrame {
         for(int i=0;i<size_btn;i++) {
             if(i==last) menu.add(Box.createHorizontalGlue());
             btn[i] = build_btn(image_btn[i]);
-            menu.add(Box.createHorizontalStrut(10));
+            menu.add(Box.createHorizontalStrut(20));
             menu.add(btn[i]);
-            menu.add(Box.createHorizontalStrut(10));
+            menu.add(Box.createHorizontalStrut(20));
         }
 
         // ...
@@ -93,11 +100,41 @@ public class Sys extends JFrame {
     private void init_display(){
         buffer = getContentPane();
         buffer.setLayout(cards);
+        buffer.setBackground(bkg);
     }
 
-    public static JMenu build_btn(String path){
-        JMenu btn = new JMenu();
+    public static JButton build_btn(String path){
+        JButton btn = new JButton();
         btn.setIcon(new ImageIcon("src/imagens/btns/"+path));
+
+        btn.setFocusPainted(false);
+        btn.setBorderPainted(false);
+        btn.setBackground(frg2);
+        btn.setBorder(BorderFactory.createCompoundBorder());
+
+        btn.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {}
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {}
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {}
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+                btn.setBorder(BorderFactory.createTitledBorder("   "));
+                //btn.setBackground(Color.ORANGE);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+                btn.setBorder(BorderFactory.createCompoundBorder());
+                //btn.setBackground(frg2);
+            }
+        });
+
         return btn;
     }
 
@@ -106,18 +143,43 @@ public class Sys extends JFrame {
     private JMenuBar  build_menu(){
         menu.setPreferredSize(new Dimension(width,height_menu));
         menu.setBorder(BorderFactory.createRaisedBevelBorder());
+        menu.setBackground(frg2);
         // ...
         return menu;
+    }
+    //==================================================================================================================
+    // Function
+    //==================================================================================================================
+    public void actions_btns(){
+        btn[ADD_USER].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { Program.call_user(); }
+        });
+        btn[ADD_PRODUCT].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { Program.call_prod(); }
+        });
+        btn[PDV].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { Program.call_pdv(); }
+        });
+        btn[INFO].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { Program.call_info(); }
+        });
+        btn[DATA].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { Program.call_date(); }
+        });
     }
 
     //==================================================================================================================
     // Method
     //==================================================================================================================
-    public void call(String panel){ cards.show(buffer,panel); }
+    public  void call(String panel){ cards.show(buffer,panel); }
 
     public void add(Panel panel){ buffer.add(panel.ID,panel); }
 
-    public void remove(Panel panel){ buffer.remove(panel); }
     //==================================================================================================================
     // Build
     //==================================================================================================================
@@ -162,15 +224,11 @@ public class Sys extends JFrame {
         // Style
         // ======
 
-        private int
-                padding_width  = 20,
-                padding_height = 30;
-
         // Components
         // ===========
         BorderLayout        layout     = new BorderLayout();
         protected Graph main_panel = new Graph("bkg.jpg");
-        public    JButton changer_user = new JButton();
+        public    JButton lock = new JButton();
 
         protected final int
                 EAST  = 0,
@@ -190,16 +248,23 @@ public class Sys extends JFrame {
         protected Panel(String name){
             ID=name;
             setLayout(layout);
-            setBackground(bkg2);
+            setBackground(bkg);
             setForeground(frg2);
             setBorder(BorderFactory.createRaisedBevelBorder());
             border();
 
-            changer_user.setIcon(new ImageIcon("src/imagens/btns/changer_user.png"));
-            changer_user.setFocusPainted(false);
-            changer_user.setBorderPainted(false);
-            changer_user.setContentAreaFilled(false);
-            changer_user.setOpaque(false);
+            lock.setIcon(new ImageIcon("src/imagens/btns/changer_user.png"));
+            lock.setFocusPainted(false);
+            lock.setBorderPainted(false);
+            lock.setContentAreaFilled(false);
+            lock.setOpaque(false);
+
+            lock.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    JOptionPane.showMessageDialog(null,"LOCK");
+                }
+            });
 
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -219,11 +284,13 @@ public class Sys extends JFrame {
 
         private void border(){
             for(int i=0;i<4;i++) {
+                int padding_width = 20;
+                int padding_height = 30;
                 space[i].setPreferredSize(new Dimension(padding_width, padding_height));
-                space[i].setBackground(bkg2);
+                space[i].setBackground(bkg);
             }
 
-            space[SOUTH].add(changer_user,BorderLayout.EAST);
+            space[SOUTH].add(lock  , BorderLayout.EAST);
             space[SOUTH].add(marca(),BorderLayout.WEST);
             space[NORTH].add(clock);
             add( space[NORTH],       BorderLayout.NORTH  );
@@ -244,16 +311,7 @@ public class Sys extends JFrame {
         //==============================================================================================================
         // Method
         //==============================================================================================================
-        // Padding
-        // =======
-        void set_padding_width(int value){  padding_width  = value; }
-        void set_padding_height(int value){ padding_height = value; }
-        int get_padding_width(){  return padding_width;  }
-        int get_padding_height(){ return padding_height; }
 
-        // Background Image
-        // ================
-        public void set_bkg_image(String path){ main_panel= new Graph(path); }
         //==============================================================================================================
     }
 }

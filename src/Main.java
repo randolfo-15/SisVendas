@@ -1,14 +1,8 @@
+import Manager.Program;
 import Manager.Sys;
 import Pages.Menu;
 
 
 public class Main {
-    public static void main(String[] args) {
-
-        Sys sys = new Sys();
-        Menu menu = new Menu();
-
-        sys.add(menu);
-        sys.call(menu.ID);
-    }
+    public static void main(String[] args) { Program.start(); }
 }
