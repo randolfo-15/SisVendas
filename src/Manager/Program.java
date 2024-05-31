@@ -1,7 +1,8 @@
 package Manager;
 
-import Pages.*;
 
+import Pages.*;
+import dados.User;
 import javax.swing.*;
 
 
@@ -15,6 +16,7 @@ public class Program {
         DATA     = 5;
 
     private static final Sys sys =new Sys();
+    private static User user = new User();
 
     private static final Sys.Panel[] page = new Sys.Panel[]{
             new Menu(),
@@ -28,6 +30,7 @@ public class Program {
 
     public static void start(){
         for (var panel:page) sys.add(panel);
+        login();
         sys.call(page[MENU].ID);
     }
 
@@ -51,4 +54,10 @@ public class Program {
         JOptionPane.showMessageDialog(null,"Data's");
         sys.call(page[DATA].ID);
     }
+
+    public static void login(){
+
+    }
+
+    public  static String user_name(){ return ((user.get_adm())?"Ad":"Cx")+user.get_name()+": "; }
 }

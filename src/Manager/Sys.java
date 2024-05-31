@@ -196,17 +196,18 @@ public class Sys extends JFrame {
         // ==========
         public final String ID;            //< Name class
 
+
         // Clock
         // =====
         static class Clock extends JLabel{
             Clock(){
-                setText("00:00:00");
+                setText("00:00:00     ");
                 setForeground(frg1);
                 setFont(new Font("Serif",Font.BOLD,18));
                 Timer time = new Timer(1000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        setText(new SimpleDateFormat("HH:mm:ss").format(new Date()));
+                        setText(new SimpleDateFormat("HH:mm:ss     ").format(new Date()));
                     }
                 });
                 time.start();
@@ -221,9 +222,6 @@ public class Sys extends JFrame {
                 width  = Sys.panel_width , //< Largura
                 height = Sys.panel_height; //< Altura
         //==============================================================================================================
-        // Style
-        // ======
-
         // Components
         // ===========
         BorderLayout        layout     = new BorderLayout();
@@ -239,7 +237,7 @@ public class Sys extends JFrame {
         protected JPanel[] space  = new JPanel[]{
                 new JPanel(), //< EAST
                 new JPanel(), //< WEST
-                new JPanel(), //< NORTH
+                new JPanel(new BorderLayout()), //< NORTH
                 new JPanel(new BorderLayout())  //< SOUTH
         };
         //==============================================================================================================
@@ -258,6 +256,8 @@ public class Sys extends JFrame {
             lock.setBorderPainted(false);
             lock.setContentAreaFilled(false);
             lock.setOpaque(false);
+
+
 
             lock.addActionListener(new ActionListener() {
                 @Override
@@ -290,9 +290,11 @@ public class Sys extends JFrame {
                 space[i].setBackground(bkg);
             }
 
-            space[SOUTH].add(lock  , BorderLayout.EAST);
+            space[SOUTH].add(clock  , BorderLayout.EAST);
             space[SOUTH].add(marca(),BorderLayout.WEST);
-            space[NORTH].add(clock);
+            space[NORTH].add(lock,BorderLayout.EAST);
+            space[NORTH].add(user(),BorderLayout.WEST);
+
             add( space[NORTH],       BorderLayout.NORTH  );
             add( space[WEST],        BorderLayout.WEST   );
             add( init_display(),     BorderLayout.CENTER );
@@ -300,14 +302,14 @@ public class Sys extends JFrame {
             add( space[SOUTH],       BorderLayout.SOUTH  );
         }
 
-        private JLabel marca(){
-            JLabel label = new JLabel("    SisVendas");
+        private  JLabel make_text(String value){
+            JLabel label = new JLabel("    "+value);
             label.setForeground(frg1);
             label.setFont(new Font("Serif",Font.BOLD,20));
             return label;
         }
-
-
+        private JLabel marca(){return make_text(" SisVendas"); }
+        private JLabel user(){ return make_text(Program.user_name());}
         //==============================================================================================================
         // Method
         //==============================================================================================================
