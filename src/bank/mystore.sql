@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31/05/2024 às 21:12
+-- Tempo de geração: 31/05/2024 às 22:20
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -33,16 +33,17 @@ CREATE TABLE `users` (
   `email` varchar(200) NOT NULL,
   `phone` varchar(200) DEFAULT NULL,
   `addres` varchar(200) DEFAULT NULL,
-  `password` varchar(200) NOT NULL
+  `password` varchar(200) NOT NULL,
+  `administrador` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `addres`, `password`) VALUES
-(0, 'Randolfo A Goncalves', 'randolfo@gmail.com', '31981059465', 'Rua das Gerais', '123456'),
-(2, 'Pablo Rangel Abreu Andrade', 'pablo.rangel2506@gmail.com', '(31)991919086', 'Rua xyz', '123456');
+INSERT INTO `users` (`id`, `name`, `email`, `phone`, `addres`, `password`, `administrador`) VALUES
+(0, 'Randolfo A Goncalves', 'randolfo@gmail.com', '31981059465', 'Rua das Gerais', '123456', 1),
+(2, 'Pablo Rangel Abreu Andrade', 'pablo.rangel2506@gmail.com', '(31)991919086', 'Rua xyz', '123456', 1);
 
 --
 -- Índices para tabelas despejadas
