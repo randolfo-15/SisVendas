@@ -55,7 +55,7 @@ public class LoginForm extends JDialog {
         setVisible(true);
     }
 
-    public User user;
+    private User user;
 
     private User getAuthenticatedUser(String email, String password){
 
@@ -109,5 +109,10 @@ public class LoginForm extends JDialog {
 
             System.out.println("Authentication canceled");
         }
+    }
+
+    public User usuarioAtual(){
+
+        return user;
     }
 }
