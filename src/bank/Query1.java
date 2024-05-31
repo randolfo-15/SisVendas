@@ -7,13 +7,16 @@ public class Query1 <T> {
 
     Connection connection;
 
-    public Query1() { try {
+    public Query1() {
+
+        try {
 
         connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
 
         } catch (Exception e) {
 
-        } }
+        }
+    }
 
     //void desconnect(){ connection.close(); }
 
@@ -46,7 +49,7 @@ public class Query1 <T> {
                 System.out.println("Conectado ao banco de dados!");
 
                 // Criação da tabela
-                String createTableSQL = "CREATE TABLE IF NOT EXISTS exemplo (" +
+                String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
                         "id INT AUTO_INCREMENT PRIMARY KEY, " +
                         "nome VARCHAR(50) NOT NULL, " +
                         "email VARCHAR(50) NOT NULL UNIQUE, " +
@@ -78,7 +81,7 @@ public class Query1 <T> {
                 System.out.println("Conectado ao banco de dados!");
 
                 // Consulta para buscar o elemento pelo ID
-                String selectSQL = "SELECT * FROM exemplo WHERE id = ?";
+                String selectSQL = "SELECT * FROM users WHERE id = ?";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
                     // Define o valor do ID na consulta
@@ -88,7 +91,7 @@ public class Query1 <T> {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         // Processa o resultado
                         if (resultSet.next()) {
-                            // Supondo que a tabela "exemplo" tem colunas: id, nome, email, data_criacao
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
                             int id = resultSet.getInt("id");
                             String nome = resultSet.getString("nome");
                             String email = resultSet.getString("email");
@@ -124,7 +127,7 @@ public class Query1 <T> {
                 System.out.println("Conectado ao banco de dados!");
 
                 // Consulta para buscar o elemento pelo ID
-                String selectSQL = "SELECT * FROM exemplo WHERE uname = ?";
+                String selectSQL = "SELECT * FROM users WHERE uname = ?";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
                     // Define o valor do ID na consulta
@@ -134,7 +137,7 @@ public class Query1 <T> {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         // Processa o resultado
                         if (resultSet.next()) {
-                            // Supondo que a tabela "exemplo" tem colunas: id, nome, email, data_criacao
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
                             int id = resultSet.getInt("id");
                             String nome = resultSet.getString("nome");
                             String uname = resultSet.getString("uname");
@@ -174,7 +177,7 @@ public class Query1 <T> {
                 System.out.println("Conectado ao banco de dados!");
 
                 // Consulta para buscar o elemento pelo ID
-                String selectSQL = "SELECT * FROM exemplo WHERE phone = ?";
+                String selectSQL = "SELECT * FROM users WHERE phone = ?";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
                     // Define o valor do ID na consulta
@@ -184,7 +187,7 @@ public class Query1 <T> {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         // Processa o resultado
                         if (resultSet.next()) {
-                            // Supondo que a tabela "exemplo" tem colunas: id, nome, email, data_criacao
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
                             int id = resultSet.getInt("id");
                             String nome = resultSet.getString("nome");
                             String uname = resultSet.getString("uname");
@@ -224,7 +227,7 @@ public class Query1 <T> {
                 System.out.println("Conectado ao banco de dados!");
 
                 // Consulta para buscar o elemento pelo ID
-                String selectSQL = "SELECT * FROM exemplo WHERE email = ?";
+                String selectSQL = "SELECT * FROM users WHERE email = ?";
 
                 try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
                     // Define o valor do ID na consulta
@@ -234,7 +237,7 @@ public class Query1 <T> {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         // Processa o resultado
                         if (resultSet.next()) {
-                            // Supondo que a tabela "exemplo" tem colunas: id, nome, email, data_criacao
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
                             int id = resultSet.getInt("id");
                             String nome = resultSet.getString("nome");
                             String uname = resultSet.getString("uname");
@@ -275,7 +278,7 @@ public class Query1 <T> {
 
     public static void updateRecord(int id, String nome, String email) {
 
-        String updateSQL = "UPDATE exemplo SET nome = ?, email = ? WHERE id = ?";
+        String updateSQL = "UPDATE users SET nome = ?, email = ? WHERE id = ?";
 
         try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {
@@ -307,7 +310,7 @@ public class Query1 <T> {
 
     }
     public static void deleteRecord(int id) {
-        String deleteSQL = "DELETE FROM exemplo WHERE id = ?";
+        String deleteSQL = "DELETE FROM users WHERE id = ?";
 
         try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
@@ -337,7 +340,7 @@ public class Query1 <T> {
     }
 
     public static int getRecordCount() {
-        String countSQL = "SELECT COUNT(*) FROM exemplo";
+        String countSQL = "SELECT COUNT(*) FROM users";
         int count = 0;
 
         try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
