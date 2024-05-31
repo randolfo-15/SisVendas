@@ -1,3 +1,5 @@
+package Pages;
+
 import dados.User;
 
 import javax.swing.*;
@@ -55,7 +57,7 @@ public class LoginForm extends JDialog {
         setVisible(true);
     }
 
-    private User user;
+    private static User user;
 
     private User getAuthenticatedUser(String email, String password){
 
@@ -111,7 +113,7 @@ public class LoginForm extends JDialog {
         }
     }
 
-    public User usuarioAtual(){
+    public static User usuarioAtual(){
 
         return user;
     }
