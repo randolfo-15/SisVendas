@@ -1,3 +1,10 @@
+/*****************************************************************************
+ *   Program
+ *  =========
+ *  @file  : Program.java
+ *  @author: Randolfo A Goncalves
+ *  @since : 30/05/24
+ ****************************************************************************/
 package Manager;
 import Pages.*;
 import dados.User;
@@ -29,28 +36,28 @@ public class Program {
 
     public static void start(){
         for (var panel:page) sys.add(panel);
-        login();
+        //login();
         sys.call(page[MENU].ID);
     }
 
     public static void call_user(){
-        JOptionPane.showMessageDialog(null,"User");
+        page[ADD_USER].transform();
         sys.call(page[ADD_USER].ID);
     }
     public static void call_prod(){
-        JOptionPane.showMessageDialog(null,"Products");
+        page[ADD_PROD].transform();
         sys.call(page[ADD_PROD].ID);
     }
     public static void call_pdv() {
-        JOptionPane.showMessageDialog(null,"PDV");
+        page[PDV].transform();
         sys.call(page[PDV].ID);
     }
     public static void call_info(){
-        JOptionPane.showMessageDialog(null,"Info");
+        page[INFO].transform();
         sys.call(page[INFO].ID);
     }
     public static void call_date(){
-        JOptionPane.showMessageDialog(null,"Data's");
+        page[DATA].transform();
         sys.call(page[DATA].ID);
     }
 

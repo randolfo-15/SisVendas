@@ -1,7 +1,14 @@
+/*****************************************************************************
+ *   Person
+ *  ========
+ *  @file  : Person.java
+ *  @author: Randolfo A Goncalves
+ *  @since : 28/05/24
+ ****************************************************************************/
 package Pages;
 
 import Manager.Sys;
 
-public class Person extends Sys.Panel {
-    public Person(){ super("Person");}
-}
+import javax.swing.*;
+
+public class Person extends Sys.Panel { public Person(){ super("Person");} }

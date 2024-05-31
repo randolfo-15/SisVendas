@@ -313,7 +313,18 @@ public class Sys extends JFrame {
         //==============================================================================================================
         // Method
         //==============================================================================================================
-
+        public void transform(){
+            main_panel.setBackground(Color.BLACK);
+            main_panel.setImg(new ImageIcon("src/imagens/magic.gif"));
+            main_panel.repaint();
+            int duration =1300;
+            Timer time = new Timer(duration, magic ->{
+                main_panel.setImg(new ImageIcon("src/imagens/bkg.jpg"));
+                main_panel.repaint();
+            });
+            time.setRepeats(false);
+            time.start();
+        }
         //==============================================================================================================
     }
 }

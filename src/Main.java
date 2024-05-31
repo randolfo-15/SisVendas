@@ -8,8 +8,8 @@ import Pages.PDV1;
 public class Main {
     public static void main(String[] args) {
 
-        new LoginForm(null);
-        new PDV1(null);
+        //new LoginForm(null);
+        //new PDV1(null);
         Program.start();
     }
 }
