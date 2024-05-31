@@ -105,7 +105,7 @@ public class Sys extends JFrame {
 
     public static JButton build_btn(String path){
         JButton btn = new JButton();
-        btn.setIcon(new ImageIcon("D:\\SisVendas\\SisVendas\\src\\imagens\\btns\\"+path));
+        btn.setIcon(new ImageIcon("src/imagens/btns/"+path));
 
         btn.setFocusPainted(false);
         btn.setBorderPainted(false);

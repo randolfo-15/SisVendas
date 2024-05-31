@@ -16,6 +16,7 @@ public class Program {
     private static final Sys sys =new Sys();
     private static User user = new User();
 
+
     private static final Sys.Panel[] page = new Sys.Panel[]{
             new Menu(),
             new Person(),
@@ -54,12 +55,11 @@ public class Program {
     }
 
     public static void login(){
-        //Pages.LoginForm lg = new Pages.LoginForm(null);
-
+        new LoginForm(null);
+        user = LoginForm.usuarioAtual();
     }
 
     public  static String user_name(){
-        user.set_name("Randolfo A Gonacalves");
         return ((user.get_adm())?"Ad":"Cx")+": "+user.get_name();
     }
 }

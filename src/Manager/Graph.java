@@ -18,7 +18,7 @@ public class Graph extends javax.swing.JPanel {
     }
 
     public Graph(String path) {
-        img = new ImageIcon("D:\\SisVendas\\SisVendas\\src\\imagens\\"+path);
+        img = new ImageIcon("src/imagens/"+path);
     }
 
 

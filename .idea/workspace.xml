@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="..." />
+    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="...">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/LoginForm$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/LoginForm$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/LoginForm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Manager/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Manager/Program.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/PDV1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/bank/Query1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/bank/Query1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manager/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manager/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manager/Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Sys.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,7 +55,7 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.LoginForm">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="SisVendas" />
