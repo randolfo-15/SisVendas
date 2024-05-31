@@ -2,7 +2,7 @@ package Manager;
 import Pages.*;
 import dados.User;
 import javax.swing.*;
-import Manager.*;
+
 
 public class Program {
     public static final int
@@ -14,7 +14,7 @@ public class Program {
         DATA     = 5;
 
     private static final Sys sys =new Sys();
-
+    private static User user = new User();
 
     private static final Sys.Panel[] page = new Sys.Panel[]{
             new Menu(),
@@ -59,7 +59,6 @@ public class Program {
     }
 
     public  static String user_name(){
-        User user = new User();
         user.set_name("Randolfo A Gonacalves");
         return ((user.get_adm())?"Ad":"Cx")+": "+user.get_name();
     }
