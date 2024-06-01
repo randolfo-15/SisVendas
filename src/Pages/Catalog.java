@@ -16,14 +16,14 @@ public class Catalog extends Sys.Panel {
     //==================================================================================================================
     // Fields
     //==================================================================================================================
-    private final JTabbedPane tabbed = new JTabbedPane();
-    private final int
+    protected final JTabbedPane tabbed = new JTabbedPane();
+    protected final int
         DATA = 0,
         NEW  = 1,
         EDIT = 2,
         DEL  = 3;
 
-    private final JPanel[] panel =new JPanel[]{
+    protected final JPanel[] panel =new JPanel[]{
             new JPanel(),
             new JPanel(),
             new JPanel(),
@@ -32,7 +32,7 @@ public class Catalog extends Sys.Panel {
     //==================================================================================================================
     // Build
     //==================================================================================================================
-        Catalog(String name){
+        public Catalog(String name){
             super(name);
             init_tabs();
             plug();

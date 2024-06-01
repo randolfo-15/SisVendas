@@ -276,33 +276,34 @@ public class Sys extends JFrame {
                     new Clock();
                 }
             });
+
         }
 
 
-
         JPanel init_display(){
+            //  Create Main Page
+            // ==================
+            main_panel.setLayout(new BorderLayout());
+            main_panel.add(zone,BorderLayout.CENTER);
             main_panel.setPreferredSize(new Dimension(width,height));
             main_panel.setBorder(BorderFactory.createLoweredBevelBorder());
             main_panel.setForeground(frg1);
 
-            zone.setBackground(new Color(0,0,0,50));
+            // Style Zone
+            // ==========
+            zone.setVisible(false);
+            zone.setBackground(new Color(0,0,0,90));
             zone_work.setBackground(new Color(0,0,0,0));
             zone_close.setBackground(new Color(0,0,0,0));
             work_space.setBackground(new Color(0,0,0,0));
 
+            //  Add Zones
+            // ===========
             zone.add(zone_work,BorderLayout.CENTER);
-            zone.add(zone_close,BorderLayout.NORTH);
-
-            zone.setVisible(false);
-            zone.setPreferredSize(new Dimension(width+600,height+200));
-            zone_work.setPreferredSize(new Dimension(width+530,height+190));
-
+            zone.add(zone_close,BorderLayout.LINE_END);
+            zone.add(make_text("aaaa",32),BorderLayout.SOUTH);
             zone_work.add(work_space,BorderLayout.CENTER);
-            zone_close.add(Box.createHorizontalGlue());
             zone_close.add(build_btn_close());
-            zone_close.add(build_btn_max());
-
-            main_panel.add(zone);
 
             return main_panel;
         }
@@ -327,10 +328,10 @@ public class Sys extends JFrame {
             add( space[SOUTH],       BorderLayout.SOUTH  );
         }
 
-        private  JLabel make_text(String value){
+        private  JLabel make_text(String value,int size){
             JLabel label = new JLabel("    "+value);
             label.setForeground(frg1);
-            label.setFont(new Font("Serif",Font.BOLD,20));
+            label.setFont(new Font("Serif",Font.BOLD,size));
             return label;
         }
 
@@ -343,12 +344,11 @@ public class Sys extends JFrame {
             btn.setOpaque(false);
             return btn;
         }
-        private JLabel marca(){return make_text(" SisVendas"); }
-        private JLabel user(){ return make_text(Program.user_name());}
+        private JLabel marca(){return make_text(" SisVendas",20); }
+        private JLabel user(){ return make_text(Program.user_name(),20);}
 
         private JButton build_btn_close(){
             JButton close = make_btn("src/imagens/close.png");
-
             close.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -359,18 +359,7 @@ public class Sys extends JFrame {
             return  close;
         }
 
-        private JButton build_btn_max(){
-            JButton max = make_btn("src/imagens/max.png");
-            max.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
 
-                    //zone_work.setPreferredSize(new Dimension(panel_width-50,panel_height));
-                    //repaint();
-                }
-            });
-            return  max;
-        }
 
         //==============================================================================================================
         // Method
