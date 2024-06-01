@@ -196,7 +196,6 @@ public class Sys extends JFrame {
         // ==========
         public final String ID;            //< Name class
 
-
         // Clock
         // =====
         static class Clock extends JLabel{
@@ -224,9 +223,14 @@ public class Sys extends JFrame {
         //==============================================================================================================
         // Components
         // ===========
-        BorderLayout        layout     = new BorderLayout();
-        protected Graph main_panel = new Graph("bkg.jpg");
-        public    JButton lock = new JButton();
+        BorderLayout          layout     = new BorderLayout();
+        private final Graph   main_panel = new Graph("bkg.jpg");
+        protected     JPanel  work_space = new JPanel(new BorderLayout());
+        private final JPanel  zone = new JPanel(new BorderLayout());
+        private final JPanel zone_work = new JPanel(new BorderLayout());
+        private final JPanel zone_close = new JPanel();
+
+        private final JButton lock = new JButton();
 
         protected final int
                 EAST  = 0,
@@ -274,10 +278,31 @@ public class Sys extends JFrame {
             });
         }
 
+
+
         JPanel init_display(){
             main_panel.setPreferredSize(new Dimension(width,height));
             main_panel.setBorder(BorderFactory.createLoweredBevelBorder());
             main_panel.setForeground(frg1);
+
+            zone.setBackground(new Color(0,0,0,50));
+            zone_work.setBackground(new Color(0,0,0,0));
+            zone_close.setBackground(new Color(0,0,0,0));
+            work_space.setBackground(new Color(0,0,0,0));
+
+            zone.add(zone_work,BorderLayout.CENTER);
+            zone.add(zone_close,BorderLayout.NORTH);
+
+            zone.setVisible(false);
+            zone.setPreferredSize(new Dimension(width+600,height+200));
+            zone_work.setPreferredSize(new Dimension(width+530,height+190));
+
+            zone_work.add(work_space,BorderLayout.CENTER);
+            zone_close.add(Box.createHorizontalGlue());
+            zone_close.add(build_btn_close());
+            zone_close.add(build_btn_max());
+
+            main_panel.add(zone);
 
             return main_panel;
         }
@@ -308,22 +333,62 @@ public class Sys extends JFrame {
             label.setFont(new Font("Serif",Font.BOLD,20));
             return label;
         }
+
+        private JButton make_btn(String path){
+            JButton btn = new JButton(new ImageIcon(path));
+            btn.setPreferredSize(new Dimension(48,48));
+            btn.setFocusPainted(false);
+            btn.setBorderPainted(false);
+            btn.setContentAreaFilled(false);
+            btn.setOpaque(false);
+            return btn;
+        }
         private JLabel marca(){return make_text(" SisVendas"); }
         private JLabel user(){ return make_text(Program.user_name());}
+
+        private JButton build_btn_close(){
+            JButton close = make_btn("src/imagens/close.png");
+
+            close.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    Program.call_menu();
+                    zone.setVisible(false);
+                }
+            });
+            return  close;
+        }
+
+        private JButton build_btn_max(){
+            JButton max = make_btn("src/imagens/max.png");
+            max.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+
+                    //zone_work.setPreferredSize(new Dimension(panel_width-50,panel_height));
+                    //repaint();
+                }
+            });
+            return  max;
+        }
+
         //==============================================================================================================
         // Method
         //==============================================================================================================
         public void transform(){
+            zone.setVisible(false);
             main_panel.setBackground(Color.BLACK);
             main_panel.setImg(new ImageIcon("src/imagens/magic.gif"));
             main_panel.repaint();
             int duration =1300;
             Timer time = new Timer(duration, magic ->{
                 main_panel.setImg(new ImageIcon("src/imagens/bkg.jpg"));
+                zone.setVisible(true);
                 main_panel.repaint();
             });
             time.setRepeats(false);
             time.start();
+
         }
         //==============================================================================================================
     }

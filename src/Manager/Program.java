@@ -40,6 +40,10 @@ public class Program {
         sys.call(page[MENU].ID);
     }
 
+    public static void call_menu(){
+        sys.call(page[MENU].ID);
+    }
+
     public static void call_user(){
         page[ADD_USER].transform();
         sys.call(page[ADD_USER].ID);
