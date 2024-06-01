@@ -292,7 +292,7 @@ public class Sys extends JFrame {
             // Style Zone
             // ==========
             zone.setVisible(false);
-            zone.setBackground(new Color(0,0,0,90));
+            zone.setBackground(new Color(0,0,0,120));
             zone_work.setBackground(new Color(0,0,0,0));
             zone_close.setBackground(new Color(0,0,0,0));
             work_space.setBackground(new Color(0,0,0,0));
@@ -301,7 +301,10 @@ public class Sys extends JFrame {
             // ===========
             zone.add(zone_work,BorderLayout.CENTER);
             zone.add(zone_close,BorderLayout.LINE_END);
-            zone.add(make_text("aaaa",32),BorderLayout.SOUTH);
+            JPanel pnl = new JPanel();
+            pnl.add(make_text(ID,32));
+            pnl.setBackground(new Color(0,0,0,0));
+            zone.add(pnl,BorderLayout.SOUTH);
             zone_work.add(work_space,BorderLayout.CENTER);
             zone_close.add(build_btn_close());
 

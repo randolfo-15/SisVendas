@@ -11,4 +11,4 @@ import Manager.Sys;
 
 import javax.swing.*;
 
-public class Person extends Catalog { public Person(){ super("Person");} }
+public class Person extends Catalog { public Person(){ super("Usuários");} }

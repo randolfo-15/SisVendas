@@ -30,7 +30,7 @@ public class Program {
             new Item(),
             new Menu(),
             new Info(),
-            new Datas()
+            new Data()
     };
 
 

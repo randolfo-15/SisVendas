@@ -3,5 +3,5 @@ package Pages;
 import Manager.Sys;
 
 public class Info extends Sys.Panel {
-    public Info(){ super("Info"); }
+    public Info(){ super("Informações"); }
 }
