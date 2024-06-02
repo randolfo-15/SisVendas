@@ -6,11 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Sys.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Catalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Catalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dados/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/imagens/bkg2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/imagens/bkg2.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

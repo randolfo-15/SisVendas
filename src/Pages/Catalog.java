@@ -26,9 +26,9 @@ public class Catalog extends Sys.Panel {
 
     protected final Graph[] page =new Graph[]{
             new Graph(),
-            new Graph(),
-            new Graph(),
-            new Graph()
+            new Graph("bkg2.jpg"),
+            new Graph("bkg2.jpg"),
+            new Graph("bkg2.jpg")
     };
     //==================================================================================================================
     // Build

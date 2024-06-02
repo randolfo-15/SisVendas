@@ -60,8 +60,9 @@ public class Program {
         sys.call(page[INFO].ID);
     }
     public static void call_date(){
-        page[DATA].transform();
-        sys.call(page[DATA].ID);
+        JOptionPane.showMessageDialog(null,"Bem Vindo ao SisVendas. :)");
+        //page[DATA].transform();
+        //sys.call(page[DATA].ID);
     }
 
     public static void login(){
