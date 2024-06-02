@@ -180,6 +180,22 @@ public class Sys extends JFrame {
 
     public void add(Panel panel){ buffer.add(panel.ID,panel); }
 
+    public static JLabel make_text(String value,int size,Color colour){
+        JLabel label = new JLabel(value);
+        label.setForeground(colour);
+        label.setFont(new Font("Serif",Font.BOLD,size));
+        return label;
+    }
+
+    public static void make_component(Component obj){
+        obj.setFont(new Font("Serif",Font.BOLD,14));
+        //obj.setSize(new Dimension(20,20));
+    }
+
+    public static String cargo(boolean type){ return (type)?"Administrador":"Caixa"; }
+
+    public static final String _html = "<html> <body>";
+    public static final String html_ = "</body> </html>";
     //==================================================================================================================
     // Build
     //==================================================================================================================
@@ -302,7 +318,7 @@ public class Sys extends JFrame {
             zone.add(zone_work,BorderLayout.CENTER);
             zone.add(zone_close,BorderLayout.LINE_END);
             JPanel pnl = new JPanel();
-            pnl.add(make_text(ID,32));
+            pnl.add(make_text(ID,32,frg1));
             pnl.setBackground(new Color(0,0,0,0));
             zone.add(pnl,BorderLayout.SOUTH);
             zone_work.add(work_space,BorderLayout.CENTER);
@@ -331,12 +347,7 @@ public class Sys extends JFrame {
             add( space[SOUTH],       BorderLayout.SOUTH  );
         }
 
-        private  JLabel make_text(String value,int size){
-            JLabel label = new JLabel("    "+value);
-            label.setForeground(frg1);
-            label.setFont(new Font("Serif",Font.BOLD,size));
-            return label;
-        }
+
 
         private JButton make_btn(String path){
             JButton btn = new JButton(new ImageIcon(path));
@@ -347,8 +358,8 @@ public class Sys extends JFrame {
             btn.setOpaque(false);
             return btn;
         }
-        private JLabel marca(){return make_text(" SisVendas",20); }
-        private JLabel user(){ return make_text(Program.user_name(),20);}
+        private JLabel marca(){return make_text("     SisVendas",20,frg1); }
+        private JLabel user(){ return make_text("     "+Program.user_name(),20,frg1);}
 
         private JButton build_btn_close(){
             JButton close = make_btn("src/imagens/close.png");

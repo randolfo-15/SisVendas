@@ -7,6 +7,7 @@
  ****************************************************************************/
 package Pages;
 
+import Manager.Graph;
 import Manager.Sys;
 
 import javax.swing.*;
@@ -23,11 +24,11 @@ public class Catalog extends Sys.Panel {
         EDIT = 2,
         DEL  = 3;
 
-    protected final JPanel[] panel =new JPanel[]{
-            new JPanel(),
-            new JPanel(),
-            new JPanel(),
-            new JPanel()
+    protected final Graph[] page =new Graph[]{
+            new Graph(),
+            new Graph(),
+            new Graph(),
+            new Graph()
     };
     //==================================================================================================================
     // Build
@@ -42,10 +43,12 @@ public class Catalog extends Sys.Panel {
     // Initialization
     //==================================================================================================================
         private void init_tabs(){
-            tabbed.addTab("Dados",panel[DATA]);
-            tabbed.addTab("Novo",panel[NEW]);
-            tabbed.addTab("Editar",panel[EDIT]);
-            tabbed.addTab("Remover",panel[DEL]);
+            tabbed.addTab("Dados",page[DATA]);
+            tabbed.addTab("Novo",page[NEW]);
+            tabbed.addTab("Editar",page[EDIT]);
+            tabbed.addTab("Remover",page[DEL]);
+            tabbed.setFont(new Font("Serif",Font.BOLD,16));
+            for(var panel : page) panel.setBackground(Sys.frg2);
         }
 
         private void plug(){ work_space.add(tabbed); }

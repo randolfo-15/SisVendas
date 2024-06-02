@@ -12,6 +12,7 @@ import javax.swing.*;
 
 
 public class Program {
+    public static User user = new User();
     public static final int
         MENU     = 0,
         ADD_USER = 1,
@@ -21,8 +22,6 @@ public class Program {
         DATA     = 5;
 
     private static final Sys sys =new Sys();
-    private static User user = new User();
-
 
     private static final Sys.Panel[] page = new Sys.Panel[]{
             new Menu(),
@@ -33,10 +32,10 @@ public class Program {
             new Data()
     };
 
-
     public static void start(){
         for (var panel:page) sys.add(panel);
         //login();
+        user = get_user_test();
         sys.call(page[MENU].ID);
     }
 
@@ -72,5 +71,16 @@ public class Program {
 
     public  static String user_name(){
         return ((user.get_adm())?"Ad":"Cx")+": "+user.get_name();
+    }
+
+    public static User get_user_test(){
+
+        user.name="Randolfo A Goncalves";
+        user.uname="Rag";
+        user.phone="(31) 98105-9465";
+        user.email="randolfo@gmail.com";
+        user.set_adm(true);
+
+        return user;
     }
 }
