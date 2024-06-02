@@ -1,13 +1,10 @@
 package Pages;
 
 import bank.Query;
-import bank.Query1;
 import bank.SQL;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -37,7 +34,7 @@ public class PDV1 extends JDialog{
 
         String a = textField1.getText();
 
-        String resultado = Query1.buscaPorId(a);
+        String resultado = Query.buscaPorId(a);
 
         if(resultado != null){
 
