@@ -168,7 +168,7 @@ public class Query1 <T> {
 
 
     //Método busrcar por uname
-    public static void buscaPorName(String nome){
+    public static void buscaPorNome(String nome){
         //String Uname = "";
 
         try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
