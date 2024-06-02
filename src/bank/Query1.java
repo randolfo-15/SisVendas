@@ -166,10 +166,61 @@ public class Query1 <T> {
         }
     }
 
-    //Método busrcar por phone
-    public static void buscaPorPhone(){
 
-        String Phone = "";
+    //Método busrcar por uname
+    public static void buscaPorName(String nome){
+        //String Uname = "";
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM users WHERE nome = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, nome);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String Nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + Nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Uname " + nome + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+
+    //Método busrcar por phone
+    public static void buscaPorPhone(String Phone){
+
+        //String Phone = "";
 
         try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
             // Verifica se a conexão foi bem-sucedida
@@ -216,10 +267,11 @@ public class Query1 <T> {
         }
     }
 
-    //Método busrcar por Email
-    public static void buscaPorEmail(){
 
-        String Email = "";
+    //Método busrcar por Email
+    public static void buscaPorEmail(String Email){
+
+        //String Email = "";
 
         try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
             // Verifica se a conexão foi bem-sucedida
