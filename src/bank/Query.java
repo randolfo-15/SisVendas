@@ -83,7 +83,7 @@ public class Query<T> {
                 System.out.println("Falha ao conectar ao banco de dados!");
             }
         } catch (SQLException e) {
-            System.err.println("Erro de conexão: " + e.getMessage());
+            System.err.println("Erro de conexao: " + e.getMessage());
         }
     }
 
