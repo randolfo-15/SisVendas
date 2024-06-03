@@ -25,7 +25,10 @@ public class Person extends Catalog {
     // Field
     //==================================================================================================================
     private User user = new User();
-
+    private final String
+        NAME  = "Nome",
+        PHONE = "Phone",
+        EMAIL = "Email";
 
     //==================================================================================================================
     //  Build
@@ -53,42 +56,51 @@ public class Person extends Catalog {
     //  User search
     //==================================================================================================================
     private void init_page_data(){
+        page[DATA].setLayout(new BorderLayout());
+
+        JLabel info = Sys.make_text("",30,Color.BLACK);
         ButtonGroup group = new ButtonGroup();
-        JTextField field = search_field(group);
-        JLabel info = Sys.make_text(make_table_data(user),30,Color.BLACK);
-        page[DATA].setLayout(new BoxLayout(page[DATA],BoxLayout.Y_AXIS));
+        JTextField field = search_field(group,info);
+
 
         // Campo de busca
         // ===============
-        JPanel pnl_00    = new JPanel();
-        pnl_00.add(new JLabel(new ImageIcon("src/imagens/lupa.png")));
+        JPanel pnl_00 = new JPanel();
+        pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        pnl_00.add(new JLabel(new ImageIcon((Graph.PATH_IMG+"lupa.png"))));
         pnl_00.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
         pnl_00.add(field);
-        pnl_00.add(make_radio_search(group,field));
-        pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
+        pnl_00.add(make_radio_search(group,field,info));
 
         // Campo de Resultado
         // ===================
-        JPanel pnl_01    = new Graph("bkg2.jpg")    ;
+        JPanel pnl_01 = new Graph(BKG_00);
         pnl_01.setBorder(BorderFactory.createRaisedBevelBorder());
+
         pnl_01.add(info);
 
         // Plugs
         // =====
-        page[DATA].add(pnl_00);
-        page[DATA].add(pnl_01);
-
+        page[DATA].add(pnl_00,BorderLayout.NORTH);
+        page[DATA].add(pnl_01,BorderLayout.CENTER);
     }
 
-    private JTextField search_field(ButtonGroup group){
+    private JTextField search_field(ButtonGroup group,JLabel info){
         JTextField in = new JTextField(30);
         in.setFont(new Font("Serif",Font.BOLD,18));
         in.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
+            public void insertUpdate(DocumentEvent documentEvent) {
+                group.clearSelection();
+                info.setText("");
+            }
 
             @Override
-            public void removeUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
+            public void removeUpdate(DocumentEvent documentEvent) {
+                group.clearSelection();
+                info.setText("");
+            }
 
             @Override
             public void changedUpdate(DocumentEvent documentEvent) {}
@@ -96,35 +108,34 @@ public class Person extends Catalog {
         return in;
     }
 
-    private JPanel make_radio_search(ButtonGroup group,JTextField field){
+    private JPanel make_radio_search(ButtonGroup group,JTextField field,JLabel info){
         JPanel pnl = new JPanel();
         JRadioButton[] radio = new JRadioButton[]{
-            new JRadioButton("Nome"),
-            new JRadioButton("Email"),
-            new JRadioButton("Phone")
+            new JRadioButton(NAME),
+            new JRadioButton(EMAIL),
+            new JRadioButton(PHONE)
         };
-
         for(var btn : radio) {
             Sys.make_component(btn);
-            group.add(btn);
-            switch (btn.getText()){
-                case "Nome": { action_radio(btn, SQL.COLUNM_NAME,field.getText()); }; break;
-                case "Email":{ /* ? */ }; break;
-                case "Phone":{ /* ? */ }; break;
-            }
-
             pnl.add(btn);
-        }
+            group.add(btn);
 
+            switch (btn.getText()){
+                case NAME:  action_radio_search(btn, SQL.COLUNM_NAME ,field,info);  break;
+                case EMAIL: action_radio_search(btn, SQL.COLUNM_EMAIL,field,info);  break;
+                case PHONE: action_radio_search(btn, SQL.COLUNM_PHONE,field,info);  break;
+            }
+        }
         return pnl;
     }
 
-    void action_radio(JRadioButton btn,String column,String field){
+    void action_radio_search(JRadioButton btn,String column,JTextField field,JLabel info){
         User user =new User();
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.search(SQL.TABLE_USER,column,field,user);
+                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                info.setText(make_table_data(user));
             }
         });
     }
@@ -350,18 +361,24 @@ public class Person extends Catalog {
 
 
     private String make_table_data(User user){
-        String html =
-            Sys._html+
-                    "<br><div align='center'>  <u>"+user.get_name()+"</u> </div> <br> <br>"+
+        boolean unavilable = user.get_passw().isEmpty();
+        if(unavilable) return Sys._html
+                +"<br> <br> <br> " +
+                    "<div align='center'> Não localizado " + "</div> " +
+                    "<div align='center'> <img src='' width='380' height='380'>  </div> " +
+                "<br>"+Sys.html_;
+
+        else return Sys._html+
+                    "<br><div align='center'>  <u>"+(user.get_name())+"</u> </div> <br>"+
                     "<table border='2' style='padding:10px '>"+
-                        "<tr style='background-color:#F80'><td> Username </td> <td>"+user.get_uname()+"</td></tr>"+
-                        "<tr style='background-color:#FF0'><td> Email    </td> <td>"+user.get_email()+"</td></tr>"+
-                        "<tr style='background-color:#F80'><td> Phone    </td> <td>"+user.get_phone()+"</td></tr>"+
-                        "<tr style='background-color:#FF0'><td> Cargo    </td> <td>"+Sys.cargo(user.get_adm())+"</td></tr>"+
-                        "<tr style='background-color:#F80'><td> Senha    </td> <td> ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ </td></tr>"+
+                        "<tr style='background-color:#F80'><td> Username </td> <td>"+(user.get_uname())+"</td></tr>"+
+                        "<tr style='background-color:#FF0'><td> Email    </td> <td>"+(user.get_email())+"</td></tr>"+
+                        "<tr style='background-color:#F80'><td> Phone    </td> <td>"+(user.get_phone())+"</td></tr>"+
+                        "<tr style='background-color:#FF0'><td> Cargo    </td> <td>"+(Sys.cargo(user.get_adm()))+"</td></tr>"+
+                        "<tr style='background-color:#F80'><td> Senha    </td> <td> (⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ )</td></tr>"+
                     "</table>"+
             Sys.html_
         ;
-        return html;
+
     }
 }

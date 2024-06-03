@@ -17,6 +17,8 @@ public class Catalog extends Sys.Panel {
     //==================================================================================================================
     // Fields
     //==================================================================================================================
+    public final String BKG_00 = "bkg2.jpg";
+
     protected final JTabbedPane tabbed = new JTabbedPane();
     protected final int
         DATA = 0,

@@ -11,6 +11,10 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 public class Graph extends javax.swing.JPanel {
+    public static final String
+        PATH_IMG = "src/imagens/",
+        PATH_BTN = "src/imagens/btns/";
+
     private ImageIcon img;
 
     public Graph() {
