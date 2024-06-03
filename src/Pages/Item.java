@@ -3,6 +3,8 @@ package Pages;
 import Manager.Graph;
 import Manager.Program;
 import Manager.Sys;
+import bank.Query;
+import bank.SQL;
 import dados.Product;
 import dados.User;
 
@@ -14,6 +16,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Item extends Catalog{
+    private final String
+        NAME = "Nome",
+        CODE = "Code";
+
     Product product = new Product();
     User user = new User();
     private JTextField field ;
@@ -37,32 +43,99 @@ public class Item extends Catalog{
         init_page_del();
     }
 
+
+    //------------------------------------------------------------------------------------------------------------------
+
+
+    //==================================================================================================================
+    //  User search
+    //==================================================================================================================
     private void init_page_data(){
-        field = make_textfield();
-        info = Sys.make_text(make_table_data(user),30, Color.BLACK);
-        page[DATA].setLayout(new BoxLayout(page[DATA],BoxLayout.Y_AXIS));
+        page[DATA].setLayout(new BorderLayout());
+
+        JLabel info = Sys.make_text("",30,Color.BLACK);
+        ButtonGroup group = new ButtonGroup();
+        JTextField field = search_field(group,info);
+
 
         // Campo de busca
         // ===============
-        JPanel pnl_00    = new JPanel();
-        pnl_00.add(new JLabel(new ImageIcon("src/imagens/lupa.png")));
+        JPanel pnl_00 = new JPanel();
+        pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        pnl_00.add(new JLabel(new ImageIcon((Graph.PATH_IMG+"lupa.png"))));
         pnl_00.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
         pnl_00.add(field);
-        pnl_00.add(make_radio_search());
-        pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
+        pnl_00.add(make_radio_search(group,field,info));
 
         // Campo de Resultado
         // ===================
-        JPanel pnl_01    = new Graph("bkg2.jpg")    ;
+        JPanel pnl_01 = new Graph(BKG_00);
         pnl_01.setBorder(BorderFactory.createRaisedBevelBorder());
+
         pnl_01.add(info);
 
         // Plugs
         // =====
-        page[DATA].add(pnl_00);
-        page[DATA].add(pnl_01);
-
+        page[DATA].add(pnl_00,BorderLayout.NORTH);
+        page[DATA].add(pnl_01,BorderLayout.CENTER);
     }
+
+    private JTextField search_field(ButtonGroup group,JLabel info){
+        JTextField in = new JTextField(30);
+        in.setFont(new Font("Serif",Font.BOLD,18));
+        in.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                group.clearSelection();
+                info.setText("");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                group.clearSelection();
+                info.setText("");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {}
+        });
+        return in;
+    }
+
+    private JPanel make_radio_search(ButtonGroup group,JTextField field,JLabel info){
+        JPanel pnl = new JPanel();
+        JRadioButton[] radio = new JRadioButton[]{
+                new JRadioButton(NAME),
+                new JRadioButton(CODE),
+        };
+        for(var btn : radio) {
+            Sys.make_component(btn);
+            pnl.add(btn);
+            group.add(btn);
+
+            switch (btn.getText()){
+                case NAME: action_radio_search(btn, SQL.COLUNM_NAME ,field,info);  break;
+                case CODE: action_radio_search(btn, SQL.COLUNM_EMAIL,field,info);  break;
+
+            }
+        }
+        return pnl;
+    }
+
+    void action_radio_search(JRadioButton btn,String column,JTextField field,JLabel info){
+        Product prd = new Product();
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Query.search(SQL.TABLE_USER,column,field.getText(),user);
+                info.setText(make_table_data(prd));
+            }
+        });
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------------
 
     private void init_page_new(){
 
@@ -226,7 +299,7 @@ public class Item extends Catalog{
 
     private void init_page_del(){
         JTextField field = make_textfield();
-        JLabel info = Sys.make_text(make_table_data(user),30,Color.BLACK);
+        JLabel info = Sys.make_text(make_table_data(new Product()),30,Color.BLACK);
         page[DEL].setLayout(new BoxLayout(page[DEL],BoxLayout.Y_AXIS));
 
         // Campo de busca
@@ -318,7 +391,7 @@ public class Item extends Catalog{
                 user.phone="(31) 98105-9111";
                 user.email="pedro@gmail.com";
                 user.set_adm(false);
-                info.setText(make_table_data(user));
+                info.setText(make_table_data(new Product()));
             }
         });
 
@@ -345,20 +418,25 @@ public class Item extends Catalog{
         return pnl_00;
     }
 
-    private String make_table_data(User user){
-        String html =
-                Sys._html+
-                        "<br><div align='center'>  <u>"+user.get_name()+"</u> </div> <br> <br>"+
-                        "<table border='2' style='padding:10px '>"+
-                        "<tr style='background-color:#F80'><td> Username </td> <td>"+user.get_uname()+"</td></tr>"+
-                        "<tr style='background-color:#FF0'><td> Email    </td> <td>"+user.get_email()+"</td></tr>"+
-                        "<tr style='background-color:#F80'><td> Phone    </td> <td>"+user.get_phone()+"</td></tr>"+
-                        "<tr style='background-color:#FF0'><td> Cargo    </td> <td>"+Sys.cargo(user.get_adm())+"</td></tr>"+
-                        "<tr style='background-color:#F80'><td> Senha    </td> <td> ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ </td></tr>"+
-                        "</table>"+
-                        Sys.html_
+    private String make_table_data(Product prd){
+        boolean unavilable = prd.get_code().isEmpty();
+        if(unavilable) return Sys._html
+                +"<br> <br> <br> " +
+                "<div align='center'> Não localizado " + "</div> " +
+                "<div align='center'> <img src='https://i.pinimg.com/originals/b1/03/3b/b1033bc996c69d3a6003c2fa07281aaf.gif'>  </div> " +
+                "<br>"+Sys.html_;
+
+        else return Sys._html+
+                "<br><div align='center'>  <u>"+(prd.get_name())+"</u> </div> <br>"+
+                "<table border='2' style='padding:10px '>"+
+                "<tr style='background-color:#F80'><td> Code </td> <td>"+(prd.get_code())+"</td></tr>"+
+                "<tr style='background-color:#FF0'><td> Categoria </td> <td>"+(prd.get_category())+"</td></tr>"+
+                "<tr style='background-color:#F80'><td> Quantidade </td> <td>"+(prd.get_amount())+"</td></tr>"+
+                "<tr style='background-color:#FF0'><td> Valor </td> <td> R$ "+(prd.get_value())+"</td></tr>"+
+                "</table>"+
+                Sys.html_
                 ;
-        return html;
+
     }
 
 }

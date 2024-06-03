@@ -144,21 +144,19 @@ public class Person extends Catalog {
     //==================================================================================================================
 
     private void init_page_new(){
-
         JTextField
-            nome = make_textfield(40) ,
-            username = make_textfield(40),
-            email = make_textfield(40),
-            phone = make_textfield(40);
+            nome = make_textfield(),
+            username = make_textfield(),
+            email = make_textfield(),
+            phone = make_textfield();
         JPasswordField
             senha1 = make_text_passw(),
             senha2 = make_text_passw();
 
-
         JPanel pnl_00 = new JPanel(new GridLayout(8,2));
+
         pnl_00.setPreferredSize(new Dimension(700,300));
         pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
-
 
         pnl_00.add(make_text("Nome"));
         pnl_00.add(nome);
@@ -213,8 +211,17 @@ public class Person extends Catalog {
 
     }
 
+    private JTextField make_textfield(){
+        JTextField in = new JTextField(40);
+        in.setFont(new Font("Serif",Font.BOLD,18));
+        return in;
+    }
+
+    //==================================================================================================================
+    //
+    //==================================================================================================================
     private void init_page_edit(){
-        JTextField field = make_textfield(40);
+        JTextField field = make_textfield();
         //page[EDIT].setLayout(new BoxLayout(page[EDIT],BoxLayout.Y_AXIS));
 
         // Campo de busca
@@ -232,10 +239,10 @@ public class Person extends Catalog {
         pnl_03.setBorder(BorderFactory.createRaisedBevelBorder());
         //----------------------------------------------------------------
         JTextField
-                nome = make_textfield(40) ,
-                username = make_textfield(40),
-                email = make_textfield(40),
-                phone = make_textfield(40);
+                nome = make_textfield() ,
+                username = make_textfield(),
+                email = make_textfield(),
+                phone = make_textfield();
         JPasswordField
                 senha1 = make_text_passw(),
                 senha2 = make_text_passw();
@@ -304,7 +311,7 @@ public class Person extends Catalog {
     }
 
     private void init_page_del(){
-        JTextField field = make_textfield(40);
+        JTextField field = make_textfield();
         JLabel info = Sys.make_text(make_table_data(user),30,Color.BLACK);
         page[DEL].setLayout(new BoxLayout(page[DEL],BoxLayout.Y_AXIS));
 
@@ -346,11 +353,7 @@ public class Person extends Catalog {
         return pnl;
     }
 
-    private JTextField make_textfield(int value){
-        JTextField in = new JTextField(value);
-        in.setFont(new Font("Serif",Font.BOLD,18));
-        return in;
-    }
+
 
     private JPasswordField make_text_passw(){
         JPasswordField in = new JPasswordField(40);
@@ -365,7 +368,7 @@ public class Person extends Catalog {
         if(unavilable) return Sys._html
                 +"<br> <br> <br> " +
                     "<div align='center'> Não localizado " + "</div> " +
-                    "<div align='center'> <img src='' width='380' height='380'>  </div> " +
+                    "<div align='center'> <img src='https://i.pinimg.com/originals/b1/03/3b/b1033bc996c69d3a6003c2fa07281aaf.gif'>  </div> " +
                 "<br>"+Sys.html_;
 
         else return Sys._html+

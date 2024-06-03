@@ -5,17 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="...">
+      <change afterPath="$PROJECT_DIR$/out/production/SisVendas/imagens/not_found.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Catalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Catalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/bank/SQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/bank/SQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/SQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/SQL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +42,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.App.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LoginForm.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.src.LoginForm.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Randolfo&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.App.executor": "Run",
+    "Application.LoginForm.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.src.LoginForm.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Randolfo",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/randolfo/IdeaProjects/SisVendas/src",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/imagens" />
     </key>
@@ -265,7 +269,31 @@
       <option name="project" value="LOCAL" />
       <updated>1717417078229</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="...">
+      <option name="closed" value="true" />
+      <created>1717437749891</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1717437749891</updated>
+    </task>
+    <task id="LOCAL-00022" summary="...">
+      <option name="closed" value="true" />
+      <created>1717437760927</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1717437760927</updated>
+    </task>
+    <task id="LOCAL-00023" summary="...">
+      <option name="closed" value="true" />
+      <created>1717437768295</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1717437768295</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
