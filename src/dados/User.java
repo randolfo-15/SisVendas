@@ -1,6 +1,5 @@
 package dados;
 
-import bank.Query;
 import bank.SQL;
 
 import java.sql.ResultSet;
