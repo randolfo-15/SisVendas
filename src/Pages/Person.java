@@ -11,7 +11,7 @@ import Manager.Graph;
 import Manager.Program;
 import Manager.Sys;
 import bank.Query;
-import bank.Query1;
+import bank.SQL;
 import dados.User;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -64,7 +64,7 @@ public class Person extends Catalog {
         pnl_00.add(new JLabel(new ImageIcon("src/imagens/lupa.png")));
         pnl_00.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
         pnl_00.add(field);
-        pnl_00.add(make_radio_search());
+        pnl_00.add(make_radio_search(group,field));
         pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
 
         // Campo de Resultado
@@ -96,42 +96,37 @@ public class Person extends Catalog {
         return in;
     }
 
-    private JPanel make_radio_search(ButtonGroup group){
-        JPanel pnl_00 = new JPanel();
-        JRadioButton
-                name  = new JRadioButton("Nome"),
-                email = new JRadioButton("Email"),
-                phone = new JRadioButton("Phone");
+    private JPanel make_radio_search(ButtonGroup group,JTextField field){
+        JPanel pnl = new JPanel();
+        JRadioButton[] radio = new JRadioButton[]{
+            new JRadioButton("Nome"),
+            new JRadioButton("Email"),
+            new JRadioButton("Phone")
+        };
 
+        for(var btn : radio) {
+            Sys.make_component(btn);
+            group.add(btn);
+            switch (btn.getText()){
+                case "Nome": { action_radio(btn, SQL.COLUNM_NAME,field.getText()); }; break;
+                case "Email":{ /* ? */ }; break;
+                case "Phone":{ /* ? */ }; break;
+            }
 
-        Sys.make_component(name);
-        Sys.make_component(email);
-        Sys.make_component(phone);
+            pnl.add(btn);
+        }
 
-        group.add(name);
-        group.add(email);
-        group.add(phone);
+        return pnl;
+    }
 
-        name.addActionListener(new ActionListener() {
+    void action_radio(JRadioButton btn,String column,String field){
+        User user =new User();
+        btn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent) { }
+            public void actionPerformed(ActionEvent actionEvent) {
+                Query.search(SQL.TABLE_USER,column,field,user);
+            }
         });
-
-        email.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) { }
-        });
-
-        phone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) { }
-        });
-
-        pnl_00.add(name);
-        pnl_00.add(email);
-        pnl_00.add(phone);
-
-        return pnl_00;
     }
     //==================================================================================================================
     //  Register user
@@ -217,7 +212,7 @@ public class Person extends Catalog {
         pnl_02.add(new JLabel(new ImageIcon("src/imagens/lupa.png")));
         pnl_02.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
         pnl_02.add(field);
-        pnl_02.add(make_radio_search());
+        //pnl_02.add(make_radio_search());
         pnl_02.setBorder(BorderFactory.createRaisedBevelBorder());
 
         // Campo de Resultado
@@ -308,7 +303,7 @@ public class Person extends Catalog {
         pnl_00.add(new JLabel(new ImageIcon("src/imagens/lupa.png")));
         pnl_00.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
         pnl_00.add(field);
-        pnl_00.add(make_radio_search());
+        //pnl_00.add(make_radio_search());
 
         pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
 

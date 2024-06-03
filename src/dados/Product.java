@@ -1,6 +1,12 @@
 package dados;
 
-public class Product {
+import bank.Archivable;
+import bank.SQL;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Product implements Archivable {
     //==================================================================================================================
     // Field
     //==================================================================================================================
@@ -16,6 +22,16 @@ public class Product {
     // Build
     //==================================================================================================================
     public Product(){}
+
+    @Override
+    public void read(ResultSet result) throws SQLException {
+        name  = result.getString (  SQL.COLUNM_NAME      );
+        ctry  = result.getString (  SQL.COLUMN_CATEGORY  );
+        code  = result.getString (  SQL.COLUMN_CODE      );
+        value  = result.getFloat (  SQL.COLUMN_VALUE     );
+        amount  = result.getInt  (  SQL.COLUMN_AMOUNT    );
+    }
+
     //==================================================================================================================
     // Exceptions class
     //==================================================================================================================

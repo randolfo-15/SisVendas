@@ -20,6 +20,21 @@ public class Query<T> {
 
     //void desconnect(){ connection.close(); }
 
+    public static void search(String table,String column,String field,Archivable arq){
+        try{
+            Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL.SELECT);
+            preparedStatement.setString(1, column);
+            preparedStatement.setString(2, field );
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.getRow() > 0) arq.read(resultSet);
+            connection.close();
+        }
+        catch( SQLException ignored){}
+    }
+
+
     private boolean exist(String table,String column,String field){
         String query = "SELECT * FROM "+table+" WHERE "+column+" = ?";
 
