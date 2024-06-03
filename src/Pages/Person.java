@@ -10,6 +10,7 @@ package Pages;
 import Manager.Graph;
 import Manager.Program;
 import Manager.Sys;
+import bank.Archivable;
 import bank.Query;
 import bank.SQL;
 import dados.User;
@@ -124,7 +125,7 @@ public class Person extends Catalog {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.search(SQL.TABLE_USER,column,field,user);
+                Query.search(SQL.TABLE_USER,column,field, (Archivable) user);
             }
         });
     }

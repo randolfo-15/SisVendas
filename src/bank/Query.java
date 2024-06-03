@@ -5,7 +5,8 @@ import java.sql.*;
 public class Query<T> {
 
 
-    Connection connection;
+    private static Connection connection;
+    //Connection connection;
 
     public Query() {
 
@@ -18,9 +19,24 @@ public class Query<T> {
         }
     }
 
-    //void desconnect(){ connection.close(); }
+    //PESQUISAR - PRODUTO E USUÁRIO
+    public static void search(String table,String column,String field,Archivable arq){
+        try{
+            Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL.SELECT);
+            preparedStatement.setString(1, column);
+            preparedStatement.setString(2, field );
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-    private boolean exist(String table,String column,String field){
+            if(resultSet.getRow() > 0) arq.read(resultSet);
+            connection.close();
+        }
+        catch( SQLException ignored){}
+    }
+
+    //MÉTODO PARA INSERIR
+
+    public static boolean exist(String table, String column, String field){
         String query = "SELECT * FROM "+table+" WHERE "+column+" = ?";
 
         try {
