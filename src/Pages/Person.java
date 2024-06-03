@@ -25,9 +25,8 @@ public class Person extends Catalog {
     // Field
     //==================================================================================================================
     private User user = new User();
-    private JTextField field ;
-    private JLabel info ;
-    private ButtonGroup group = new ButtonGroup();
+
+
     //==================================================================================================================
     //  Build
     //==================================================================================================================
@@ -50,9 +49,13 @@ public class Person extends Catalog {
         init_page_del();
     }
 
+    //==================================================================================================================
+    //  User search
+    //==================================================================================================================
     private void init_page_data(){
-        field = make_textfield();
-        info = Sys.make_text(make_table_data(user),30,Color.BLACK);
+        ButtonGroup group = new ButtonGroup();
+        JTextField field = search_field(group);
+        JLabel info = Sys.make_text(make_table_data(user),30,Color.BLACK);
         page[DATA].setLayout(new BoxLayout(page[DATA],BoxLayout.Y_AXIS));
 
         // Campo de busca
@@ -76,6 +79,63 @@ public class Person extends Catalog {
         page[DATA].add(pnl_01);
 
     }
+
+    private JTextField search_field(ButtonGroup group){
+        JTextField in = new JTextField(30);
+        in.setFont(new Font("Serif",Font.BOLD,18));
+        in.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {}
+        });
+        return in;
+    }
+
+    private JPanel make_radio_search(ButtonGroup group){
+        JPanel pnl_00 = new JPanel();
+        JRadioButton
+                name  = new JRadioButton("Nome"),
+                email = new JRadioButton("Email"),
+                phone = new JRadioButton("Phone");
+
+
+        Sys.make_component(name);
+        Sys.make_component(email);
+        Sys.make_component(phone);
+
+        group.add(name);
+        group.add(email);
+        group.add(phone);
+
+        name.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { }
+        });
+
+        email.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { }
+        });
+
+        phone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) { }
+        });
+
+        pnl_00.add(name);
+        pnl_00.add(email);
+        pnl_00.add(phone);
+
+        return pnl_00;
+    }
+    //==================================================================================================================
+    //  Register user
+    //==================================================================================================================
 
     private void init_page_new(){
 
@@ -148,7 +208,7 @@ public class Person extends Catalog {
     }
 
     private void init_page_edit(){
-        JTextField field = make_textfield();
+        JTextField field = make_textfield(40);
         //page[EDIT].setLayout(new BoxLayout(page[EDIT],BoxLayout.Y_AXIS));
 
         // Campo de busca
@@ -238,7 +298,7 @@ public class Person extends Catalog {
     }
 
     private void init_page_del(){
-        JTextField field = make_textfield();
+        JTextField field = make_textfield(40);
         JLabel info = Sys.make_text(make_table_data(user),30,Color.BLACK);
         page[DEL].setLayout(new BoxLayout(page[DEL],BoxLayout.Y_AXIS));
 
@@ -268,21 +328,7 @@ public class Person extends Catalog {
     //==================================================================================================================
     //  Functions
     //==================================================================================================================
-    private JTextField make_textfield(){
-        JTextField in = new JTextField(30);
-        in.setFont(new Font("Serif",Font.BOLD,18));
-        in.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
 
-            @Override
-            public void removeUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
-
-            @Override
-            public void changedUpdate(DocumentEvent documentEvent) {}
-        });
-        return in;
-    }
 
     private JPanel make_text(String text){
         JLabel label = new JLabel(text);
@@ -306,57 +352,7 @@ public class Person extends Catalog {
         return in;
     }
 
-    private JPanel make_radio_search(){
-        JPanel pnl_00 = new JPanel();
-        JRadioButton
-                name  = new JRadioButton("Nome"),
-                email = new JRadioButton("Email"),
-                phone = new JRadioButton("Phone");
 
-
-        Sys.make_component(name);
-        Sys.make_component(email);
-        Sys.make_component(phone);
-
-        group.add(name);
-        group.add(email);
-        group.add(phone);
-
-        name.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                /*user = Query.buscaPorUname(field.getText());*/
-                user.name="Pedro Henrique";
-                user.uname="PP";
-                user.phone="(31) 98105-9111";
-                user.email="pedro@gmail.com";
-                user.set_adm(false);
-                info.setText(make_table_data(user));
-            }
-        });
-
-        email.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                /*user = Query.buscaPorEmail(field.getText());*/
-                JOptionPane.showMessageDialog(null,"Busca por email");
-            }
-        });
-
-        phone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                /*user = Query.buscaPorPhone(field.getText());*/
-                JOptionPane.showMessageDialog(null,"Busca por phone");
-            }
-        });
-
-        pnl_00.add(name);
-        pnl_00.add(email);
-        pnl_00.add(phone);
-
-        return pnl_00;
-    }
 
     private String make_table_data(User user){
         String html =
