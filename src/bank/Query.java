@@ -2,9 +2,6 @@ package bank;
 
 import java.sql.*;
 
-import static bank.SQL.PASSWORD;
-import static bank.SQL.USER;
-
 public class Query<T> {
 
 
@@ -14,7 +11,7 @@ public class Query<T> {
 
         try {
 
-        connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
+        connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
 
         } catch (Exception e) {
 
@@ -22,164 +19,6 @@ public class Query<T> {
     }
 
     //void desconnect(){ connection.close(); }
-
-    public static void search(String table,String column,String field,Archivable arq){
-        try{
-            Connection connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL.SELECT);
-            preparedStatement.setString(1, column);
-            preparedStatement.setString(2, field );
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.getRow() > 0) arq.read(resultSet);
-            connection.close();
-        }
-        catch( SQLException ignored){}
-    }
-
-
-    //MÉTODO PARA INSERIR USUÁRIO NO BANCO DE DADOS
-    public static void insertUser(String name, String uname, String phone, String email, String passw, boolean adm){
-
-        String insertSQL = "INSERT INTO users (name, uname, phone, email, passw, adm) VALUES (?, ?, ?, ?, ?, ?)";
-
-        try (Connection connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
-
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, uname);
-            preparedStatement.setString(3, phone);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, passw);
-            preparedStatement.setBoolean(6, adm);
-
-            // Executando a consulta de inserção
-            preparedStatement.executeUpdate();
-            System.out.println("Dados inseridos com sucesso!");
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao inserir dados: " + e.getMessage());
-        }
-    }
-
-    //MÉTODO PARA ATUALIZAR USUÁRIO
-    public static void updateUser(String name, String uname, String phone, String email, String passw, boolean adm) {
-        String updateSQL = "UPDATE users SET name = ?, uname = ?, phone = ?, email = ?, passw = ?, adm = ? WHERE id = ?";
-
-        try (Connection connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {
-
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, uname);
-            preparedStatement.setString(3, phone);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, passw);
-            preparedStatement.setBoolean(6, adm);
-
-            // Executando a consulta de atualização
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Dados atualizados com sucesso!");
-            } else {
-                System.out.println("Nenhum registro encontrado");
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao atualizar dados: " + e.getMessage());
-        }
-    }
-
-    //MÉTODO PARA DELETAR USUÁRIO
-    public static void deleteUserByName(String name) {
-        String deleteSQL = "DELETE FROM users WHERE name = ?";
-
-        try (Connection connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
-
-            preparedStatement.setString(1, name);
-
-            // Executando a consulta de deleção
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Usuário deletado com sucesso!");
-            } else {
-                System.out.println("Nenhum registro encontrado com o nome fornecido.");
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao deletar usuário: " + e.getMessage());
-        }
-    }
-
-    //MÉTODO PARA INSERIR PRODUTOS NO BANCO DE DADOS.
-    public static void insertProduct(String name, String ctry, String codigo, float valor, int amount) {
-        String insertSQL = "INSERT INTO produtos (name, ctry, codigo, valor, amount) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
-
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, ctry);
-            preparedStatement.setString(3, codigo);
-            preparedStatement.setDouble(4, valor);
-            preparedStatement.setInt(5, amount);
-
-            // Executando a consulta de inserção
-            preparedStatement.executeUpdate();
-            System.out.println("Produto inserido com sucesso!");
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao inserir produto: " + e.getMessage());
-        }
-    }
-
-    //MÉTODO PARA ATUALIZAR PRODUTO
-    public static void updateProduct(String name, String ctry, String codigo, float valor, int amount) {
-        String updateSQL = "UPDATE produtos SET name = ?, ctry = ?, codigo = ?, valor = ?, amount = ? WHERE id = ?";
-
-        try (Connection connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {
-
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, ctry);
-            preparedStatement.setString(3, codigo);
-            preparedStatement.setDouble(4, valor);
-            preparedStatement.setInt(5, amount);
-
-            // Executando a consulta de atualização
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Produto atualizado com sucesso!");
-            } else {
-                System.out.println("Nenhum registro encontrado.");
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao atualizar produto: " + e.getMessage());
-        }
-    }
-
-    //MÉTODO PARA DELETAR
-    public static void deleteProductByName(String name) {
-        String deleteSQL = "DELETE FROM produtos WHERE name = ?";
-
-        try (Connection connection = DriverManager.getConnection(SQL.URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
-
-            preparedStatement.setString(1, name);
-
-            // Executando a consulta de exclusão
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Produto deletado com sucesso!");
-            } else {
-                System.out.println("Nenhum registro encontrado com o nome fornecido.");
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Erro ao deletar produto: " + e.getMessage());
-        }
-    }
 
     private boolean exist(String table,String column,String field){
         String query = "SELECT * FROM "+table+" WHERE "+column+" = ?";
@@ -199,5 +38,375 @@ public class Query<T> {
     public boolean exist_name_user(String field){
 
         return exist(SQL.TABLE_USER,SQL.COLUNM_NAME, field);
+    }
+
+    //Método para criação da tabela no banco de dados
+    public static void createTable(){
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Criação da tabela
+                String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
+                        "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                        "nome VARCHAR(50) NOT NULL, " +
+                        "email VARCHAR(50) NOT NULL UNIQUE, " +
+                        "data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                        ");";
+
+                try (Statement statement = connection.createStatement()) {
+                    // Executa a declaração SQL para criar a tabela
+                    statement.execute(createTableSQL);
+                    System.out.println("Tabela criada com sucesso!");
+                } catch (SQLException e) {
+                    System.err.println("Erro ao criar a tabela: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados!");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+    //Método de busca no banco por ID
+    public static String buscaPorId(String a){
+        int idToFetch = 1; // ID do elemento que você deseja buscar
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM users WHERE id = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setInt(1, idToFetch);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String nome = resultSet.getString("nome");
+                            String email = resultSet.getString("email");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + nome);
+                            System.out.println("Email: " + email);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com ID " + idToFetch + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+        return null;
+    }
+
+    //Método busrcar por uname
+    public static void buscaPorUname(String Uname){
+        //String Uname = "";
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM users WHERE uname = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, Uname);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Uname " + Uname + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+
+    //Método busrcar por uname
+    public static void buscaPorNome(String nome){
+        //String Uname = "";
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM users WHERE nome = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, nome);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String Nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + Nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Uname " + nome + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+
+    //Método busrcar por phone
+    public static void buscaPorPhone(String Phone){
+
+        //String Phone = "";
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM users WHERE phone = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, Phone);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Phone " + Phone + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+
+    //Método busrcar por Email
+    public static void buscaPorEmail(String Email){
+
+        //String Email = "";
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD)) {
+            // Verifica se a conexão foi bem-sucedida
+            if (connection != null) {
+                System.out.println("Conectado ao banco de dados!");
+
+                // Consulta para buscar o elemento pelo ID
+                String selectSQL = "SELECT * FROM users WHERE email = ?";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
+                    // Define o valor do ID na consulta
+                    preparedStatement.setString(1, Email);
+
+                    // Executa a consulta
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        // Processa o resultado
+                        if (resultSet.next()) {
+                            // Supondo que a tabela "users" tem colunas: id, nome, email, data_criacao
+                            int id = resultSet.getInt("id");
+                            String nome = resultSet.getString("nome");
+                            String uname = resultSet.getString("uname");
+                            String email = resultSet.getString("email");
+                            String phone = resultSet.getString("phone");
+                            String dataCriacao = resultSet.getString("data_criacao");
+
+                            System.out.println("ID: " + id);
+                            System.out.println("Nome: " + nome);
+                            System.out.println("Uname" + uname);
+                            System.out.println("Email: " + email);
+                            System.out.println("Phone" + phone);
+                            System.out.println("Data de Criação: " + dataCriacao);
+                        } else {
+                            System.out.println("Elemento com Email " + Email + " não encontrado.");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Erro ao executar a consulta: " + e.getMessage());
+                }
+            } else {
+                System.out.println("Falha ao conectar ao banco de dados.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro de conexão: " + e.getMessage());
+        }
+    }
+
+
+    //Método para atualizar o elemento no Banco de dados
+    public static void updateElemento(){
+        int idToUpdate = 1; // ID do elemento que você deseja atualizar
+        String newName = "Novo Nome";
+        String newEmail = "novoemail@example.com";
+
+        updateRecord(idToUpdate, newName, newEmail);
+    }
+
+    public static void updateRecord(int id, String nome, String email) {
+
+        String updateSQL = "UPDATE users SET nome = ?, email = ? WHERE id = ?";
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)) {
+
+            // Define os valores dos parâmetros na consulta
+            preparedStatement.setString(1, nome);
+            preparedStatement.setString(2, email);
+            preparedStatement.setInt(3, id);
+
+            // Executa a atualização
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Registro atualizado com sucesso!");
+            } else {
+                System.out.println("Nenhum registro encontrado com o ID especificado.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar o registro: " + e.getMessage());
+        }
+    }
+
+    //Método para deletar um elemento no banco de dados
+    public static void deletarRegistro(){
+
+        int idToDelete = 1; // ID do elemento que você deseja deletar
+
+        deleteRecord(idToDelete);
+
+    }
+    public static void deleteRecord(int id) {
+        String deleteSQL = "DELETE FROM users WHERE id = ?";
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+
+            // Define o valor do ID no parâmetro da consulta
+            preparedStatement.setInt(1, id);
+
+            // Executa a exclusão
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Registro deletado com sucesso!");
+            } else {
+                System.out.println("Nenhum registro encontrado com o ID especificado.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao deletar o registro: " + e.getMessage());
+        }
+    }
+
+    //Método para contar quantidade de registros
+
+    public static void quantidadeRegistros(){
+
+        int count = getRecordCount();
+        System.out.println("Quantidade de registros na tabela: " + count);
+    }
+
+    public static int getRecordCount() {
+        String countSQL = "SELECT COUNT(*) FROM users";
+        int count = 0;
+
+        try (Connection connection = DriverManager.getConnection(SQL.URL, SQL.USER, SQL.PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(countSQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Obtém o resultado da contagem
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao obter a contagem de registros: " + e.getMessage());
+        }
+
+        return count;
     }
 }

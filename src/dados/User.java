@@ -1,12 +1,10 @@
 package dados;
 
-import bank.Archivable;
 import bank.SQL;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
-public class User implements Archivable {
+public class User {
     //==================================================================================================================
     // Field
     //==================================================================================================================
@@ -27,16 +25,6 @@ public class User implements Archivable {
     // Build
     //==================================================================================================================
     public User(){ }
-
-    @Override
-    public void read(ResultSet result) throws SQLException {
-        name  = result.getString  (  SQL.COLUNM_NAME  );
-        uname = result.getString  (  SQL.COLUNM_UNAME );
-        phone = result.getString  (  SQL.COLUNM_PHONE );
-        email = result.getString  (  SQL.COLUNM_EMAIL );
-        passw = result.getString  (  SQL.COLUNM_PASSW );
-        adm   = result.getBoolean (  SQL.COLUMN_ADM   );
-    }
 
     //==================================================================================================================
     // Exceptions class
@@ -69,7 +57,7 @@ public class User implements Archivable {
     }
 
     public void set_uname(String uname) throws Existing_name {
-        if(/*Query.exist(SQL.TABLE_USER, SQL.COLUNM_NAME,uname*/false) throw new Existing_name();
+        if(Query.exist(SQL.TABLE_USER, SQL.COLUNM_NAME,uname)) throw new Existing_name();
 
         this.uname=uname;
     }
@@ -107,6 +95,4 @@ public class User implements Archivable {
         }
         return user;
     }
-
-
 }
