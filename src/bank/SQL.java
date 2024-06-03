@@ -18,7 +18,7 @@ public class SQL {
             COLUNM_PASSW    = "password",
             COLUMN_ADM      = "administrador",
             COLUMN_CODE     = "codigo",
-            COLUMN_CATEGORY = "category",
+            COLUMN_CATEGORY = "catry",
             COLUMN_VALUE    = "valor",
             COLUMN_AMOUNT   = "amount";
 
