@@ -80,7 +80,7 @@ public class Sys extends JFrame {
         setSize(width,height);
         setLocationRelativeTo(null);
         setJMenuBar(build_menu());
-        setIconImage(new ImageIcon("src/imagens/coin.png").getImage());
+        setIconImage(new ImageIcon("D:\\SisVendas\\SisVendas\\src\\imagens\\coin.png").getImage());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -105,7 +105,7 @@ public class Sys extends JFrame {
 
     public static JButton build_btn(String path){
         JButton btn = new JButton();
-        btn.setIcon(new ImageIcon("src/imagens/btns/"+path));
+        btn.setIcon(new ImageIcon("D:\\SisVendas\\SisVendas\\src\\imagens\\btns\\"+path));
 
         btn.setFocusPainted(false);
         btn.setBorderPainted(false);
@@ -271,7 +271,7 @@ public class Sys extends JFrame {
             setBorder(BorderFactory.createRaisedBevelBorder());
             border();
 
-            lock.setIcon(new ImageIcon("src/imagens/btns/changer_user.png"));
+            lock.setIcon(new ImageIcon("D:\\SisVendas\\SisVendas\\src\\imagens\\btns\\changer_user.png"));
             lock.setFocusPainted(false);
             lock.setBorderPainted(false);
             lock.setContentAreaFilled(false);
@@ -362,7 +362,7 @@ public class Sys extends JFrame {
         private JLabel user(){ return make_text("     "+Program.user_name(),20,frg1);}
 
         private JButton build_btn_close(){
-            JButton close = make_btn("src/imagens/close.png");
+            JButton close = make_btn("D:\\SisVendas\\SisVendas\\src\\imagens\\close.png");
             close.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -381,11 +381,11 @@ public class Sys extends JFrame {
         public void transform(){
             zone.setVisible(false);
             main_panel.setBackground(Color.BLACK);
-            main_panel.setImg(new ImageIcon("src/imagens/magic.gif"));
+            main_panel.setImg(new ImageIcon("D:\\SisVendas\\SisVendas\\src\\imagens\\magic.gif"));
             main_panel.repaint();
             int duration =1300;
             Timer time = new Timer(duration, magic ->{
-                main_panel.setImg(new ImageIcon("src/imagens/bkg.jpg"));
+                main_panel.setImg(new ImageIcon("D:\\SisVendas\\SisVendas\\src\\imagens\\bkg.jpg"));
                 zone.setVisible(true);
                 main_panel.repaint();
             });

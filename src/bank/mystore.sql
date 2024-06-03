@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 31/05/2024 às 22:20
+-- Tempo de geração: 03/06/2024 às 19:09
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -24,47 +24,80 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura para tabela `product`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  `email` varchar(200) NOT NULL,
-  `phone` varchar(200) DEFAULT NULL,
-  `addres` varchar(200) DEFAULT NULL,
-  `password` varchar(200) NOT NULL,
-  `administrador` tinyint(1) NOT NULL DEFAULT 1
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `ctry` varchar(255) NOT NULL,
+  `codigo` varchar(20) NOT NULL,
+  `valor` float NOT NULL,
+  `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `users`
+-- Despejando dados para a tabela `product`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `addres`, `password`, `administrador`) VALUES
-(0, 'Randolfo A Goncalves', 'randolfo@gmail.com', '31981059465', 'Rua das Gerais', '123456', 1),
-(2, 'Pablo Rangel Abreu Andrade', 'pablo.rangel2506@gmail.com', '(31)991919086', 'Rua xyz', '123456', 1);
+INSERT INTO `product` (`id`, `name`, `ctry`, `codigo`, `valor`, `amount`) VALUES
+(1, 'Biscoito Recheado', 'Comida', '21', 2.96, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `uname` varchar(255) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `passw` varchar(255) NOT NULL,
+  `adm` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `name`, `uname`, `phone`, `email`, `passw`, `adm`) VALUES
+(1, 'Pablo Rangel Abreu Andrade', 'Andrade', '31991919086', 'pablo.rangel2506@gmail.com', '123456', 1),
+(2, 'Randolfo Augusto Goncalves', 'Goncalves', '31992390399', 'randolfo@gmail.com', '123456', 1);
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `users`
+-- Índices de tabela `product`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `users`
+-- AUTO_INCREMENT de tabela `product`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

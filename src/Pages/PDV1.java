@@ -34,18 +34,18 @@ public class PDV1 extends JDialog{
 
         String a = textField1.getText();
 
-        String resultado = Query.buscaPorId(a);
+        //String resultado = Query.buscaPorId(a);
 
-        if(resultado != null){
+        //if(resultado != null){
 
-            System.out.println("Objeto encontrado");
-        }
-        else{
+            //System.out.println("Objeto encontrado");
+        //}
+        //else{
 
             System.out.println("Objeto não encontrado encontrado");
         }
 
-    }
+    //}
 
     private void setLocale(JFrame parent) {
 
