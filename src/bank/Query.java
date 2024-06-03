@@ -5,7 +5,8 @@ import java.sql.*;
 public class Query<T> {
 
 
-    Connection connection;
+    //private static Connection connection;
+    static Connection connection;
 
     public Query() {
 
@@ -20,7 +21,7 @@ public class Query<T> {
 
     //void desconnect(){ connection.close(); }
 
-    private boolean exist(String table,String column,String field){
+    public static boolean exist(String table, String column, String field){
         String query = "SELECT * FROM "+table+" WHERE "+column+" = ?";
 
         try {
@@ -70,6 +71,11 @@ public class Query<T> {
             System.err.println("Erro de conexão: " + e.getMessage());
         }
     }
+
+
+
+
+
 
     //Método de busca no banco por ID
     public static String buscaPorId(String a){
