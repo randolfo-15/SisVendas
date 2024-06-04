@@ -1,15 +1,21 @@
 package Pages;
 
+import bank.Archivable;
 import bank.Query;
 import bank.SQL;
+import dados.Product;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PDV1 extends JDialog{
-    private JTextField textField1;
+    private JTextField textField1 = new JTextField();
     private JRadioButton dinheiroRadioButton;
     private JRadioButton créditoRadioButton;
     private JRadioButton débitoRadioButton;
@@ -17,6 +23,8 @@ public class PDV1 extends JDialog{
     private JButton finalizarCompraButton;
     private JButton addButton;
     private JPanel PDV1;
+    private float totalValue;
+    private List<Product> cart;
 
 
     public PDV1(JFrame parent){
@@ -29,23 +37,66 @@ public class PDV1 extends JDialog{
         setMinimumSize(new Dimension(450,474));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-
+        conexãoBanco();
+        String a = textField1.getText();
+        Product prd = new Product();
+        Query.search(SQL.TABLE_PRODUCT,SQL.COLUNM_NAME,"Biscoito",prd);
         conexãoBanco();
 
-        String a = textField1.getText();
+        cart = new ArrayList<Product>();
 
-        //String resultado = Query.buscaPorId(a);
+        totalValue = 0.0f;
 
-        //if(resultado != null){
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addProductToCart();
+            }
+        });
 
-            //System.out.println("Objeto encontrado");
-        //}
-        //else{
+        finalizarCompraButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                finalizePurchase();
+            }
+        });
 
-            System.out.println("Objeto não encontrado encontrado");
+    }
+
+    private void addProductToCart() {
+
+        conexãoBanco();
+        Product prd = new Product();
+        Product product =  Query.search(SQL.TABLE_PRODUCT,SQL.COLUNM_NAME,"Biscoito",prd);
+
+        if(textField1.getText().equals(product)){
+
+            JOptionPane.showMessageDialog(this,"produto encontrado no banco");
         }
 
-    //}
+        if (product != null) {
+            cart.add(product);
+            totalValue += product.get_value();
+            updateTotalLabel();
+            JOptionPane.showMessageDialog(this, "Produto adicionado: " + product.get_name());
+        } else {
+            JOptionPane.showMessageDialog(this, "Produto não encontrado!");
+        }
+    }
+
+    private void updateTotalLabel() {
+
+        Label totalLabel = null;
+        totalLabel.setText(String.format("Total: R$ %.2f", totalValue));
+    }
+
+    private void finalizePurchase() {
+
+        JOptionPane.showMessageDialog(this, "Compra finalizada! Total: R$ " + totalValue);
+        cart.clear();
+        totalValue = 0.0f;
+        updateTotalLabel();
+    }
 
     private void setLocale(JFrame parent) {
 

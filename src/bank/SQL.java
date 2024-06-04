@@ -5,10 +5,10 @@ public class SQL {
     public static final String
             /* Table */
             TABLE_USER    = "User",
-            TABLE_PRODUCT = "User",
+            TABLE_PRODUCT = "Product",
 
             /* Querys */
-            SELECT = "SELECT * FROM users WHERE ? = ?",
+            SELECT = "SELECT * FROM ? WHERE ? = ?",
 
             /* Columns */
             COLUNM_NAME     = "name",

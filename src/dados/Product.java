@@ -13,9 +13,9 @@ public class Product implements Archivable {
     private String
             name = "",
             ctry = "",
-            codigo = "";
+            code = "";
 
-    private float valor = 0.0F;
+    private float value = 0.0F;
     private int amount = 0;
 
     //==================================================================================================================
@@ -27,8 +27,8 @@ public class Product implements Archivable {
     public void read(ResultSet result) throws SQLException {
         name  = result.getString (  SQL.COLUNM_NAME      );
         ctry  = result.getString (  SQL.COLUMN_CATEGORY  );
-        codigo  = result.getString (  SQL.COLUMN_CODE      );
-        valor  = result.getFloat (  SQL.COLUMN_VALUE     );
+        code  = result.getString (  SQL.COLUMN_CODE      );
+        value  = result.getFloat (  SQL.COLUMN_VALUE     );
         amount  = result.getInt  (  SQL.COLUMN_AMOUNT    );
     }
 
@@ -42,9 +42,9 @@ public class Product implements Archivable {
     // Getting
     //==================================================================================================================
     public String get_name()     { return name;   }
-    public String get_code()     { return codigo;   }
+    public String get_code()     { return code;   }
     public String get_category() { return ctry;   }
-    public float  get_value()    { return valor;  }
+    public float  get_value()    { return value;  }
     public int    get_amount()   { return amount; }
     //==================================================================================================================
     // Setting
@@ -55,12 +55,12 @@ public class Product implements Archivable {
     }
     public void set_code(String code) throws Existing_code {
         if(/*Query.exist(SQL.TABLE_PRODUCT,SQL.COLUMN_CODE,name)*/false ) throw new Existing_code();
-        this.codigo=code;
+        this.code=code;
     }
 
     public void set_category(String category) { this.ctry=category.toUpperCase(); }
 
-    public void set_value(float value) { this.valor=value;   }
+    public void set_value(float value) { this.value=value;   }
 
     public void set_amount(int amount) { this.amount=amount; }
 

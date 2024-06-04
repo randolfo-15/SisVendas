@@ -1,5 +1,7 @@
 package bank;
 
+import dados.Product;
+
 import java.sql.*;
 
 import static bank.SQL.URL;
@@ -22,18 +24,20 @@ public class Query<T> {
     }
 
     //PESQUISAR - PRODUTO E USUÁRIO
-    public static void search(String table,String column,String field,Archivable arq){
+    public static Product search(String table, String column, String field, Archivable arq){
         try{
             Connection connection = DriverManager.getConnection(URL, SQL.USER, SQL.PASSWORD);
             PreparedStatement preparedStatement = connection.prepareStatement(SQL.SELECT);
-            preparedStatement.setString(1, column);
-            preparedStatement.setString(2, field );
+            preparedStatement.setString(1, table);
+            preparedStatement.setString(2, column);
+            preparedStatement.setString(3, field );
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if(resultSet.getRow() > 0) arq.read(resultSet);
             connection.close();
         }
         catch( SQLException ignored){}
+        return null;
     }
 
     //MÉTODO PARA INSERIR
@@ -236,14 +240,6 @@ public class Query<T> {
         } catch (SQLException e) {
             System.err.println("Erro ao deletar produto: " + e.getMessage());
         }
-    }
-
-
-    public static void main(String[] args) {
-        // Teste do método deleteProductByName
-        String name = "Nome do Produto"; // Substitua pelo nome do produto que deseja deletar
-
-        deleteProductByName(name);
     }
 
     public static void quantidadeRegistros(){
