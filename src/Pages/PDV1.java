@@ -84,6 +84,43 @@ public class PDV1 extends JDialog{
         }
     }
 
+    public float trocoDinheiro(float textField1){
+
+        float troco = (totalValue - textField1);
+
+        return troco;
+
+    }
+
+    public void relatorioCompra(float dinheiro){
+
+        if(créditoRadioButton.equals(true)){
+
+            JOptionPane.showMessageDialog(this,"Pagamento cartão de crédito" + totalValue);
+        }
+
+        if(débitoRadioButton.equals(true)){
+
+            JOptionPane.showMessageDialog(this, "Pagamento em cartão de débito" +totalValue);
+        }
+
+        if(dinheiroRadioButton.equals(true)){
+
+            JOptionPane.showMessageDialog(this, "Pagamento feito com dinheiro" +totalValue);
+            JOptionPane.showMessageDialog(this,"Troco" + trocoDinheiro(dinheiro));
+        }
+
+        if(PIXRadioButton.equals(true)){
+
+            JOptionPane.showMessageDialog(this,"Pagmento feito com dinheiro"+ totalValue);
+        }
+    }
+
+    public void impressaoRelatorio(){
+
+
+    }
+
     private void updateTotalLabel() {
 
         Label totalLabel = null;
