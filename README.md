@@ -29,6 +29,11 @@ A tela PDV tem como objetivo realizar a compra de um produto qualquer, onde o op
  
 </div>
 
+<div align="center">
+
+ ![Tela04](src/imagens/Tela04.png)
+  
+</div>
 
 <div align="center">
 
