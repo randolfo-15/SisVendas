@@ -14,13 +14,13 @@
 
 <div align="center">
 
- ![Tela02](src/imagens/Tela01.png)
+ ![Tela02](src/imagens/Tela02.png)
   
 </div>
 
 <div align="center">
 
- ![Tela03](src/imagens/Tela01.png)
+ ![Tela03](src/imagens/Tela03.png)
   
 </div>
 
