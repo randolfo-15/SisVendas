@@ -24,7 +24,7 @@
   
 </div>
 
-<div align="center">
+<div align="justify">
 A tela PDV tem como objetivo realizar a compra de um produto qualquer, onde o operador de caixa vai passando os produtos e os valores dos produtos estão sendo somados, como mostra a tela abaixo. Essa tela permite que o operador insira o código do produto para que uma consulta seja feita ao banco de dados e trazendo o nome e valor do mesmo para ser exibido na lista Produtos. O operador também poderá selecionar qual o método de pagamento será feito. Após passado todos os produtos o operador irá clicar em finalizar compra para trazer o total da compra.
  
 </div>
