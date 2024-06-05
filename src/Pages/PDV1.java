@@ -20,7 +20,7 @@ public class PDV1 extends JDialog{
     private JRadioButton créditoRadioButton;
     private JRadioButton débitoRadioButton;
     private JRadioButton PIXRadioButton;
-    private JButton finalizarCompraButton;
+    private JButton finalizarCompraButton = new JButton();
     private JButton addButton;
     private JPanel PDV1;
     private float totalValue;
@@ -42,6 +42,7 @@ public class PDV1 extends JDialog{
         Product prd = new Product();
         Query.search(SQL.TABLE_PRODUCT,SQL.COLUNM_NAME,"Biscoito",prd);
         conexãoBanco();
+        //PDV1.add(finalizarCompraButton);
 
         cart = new ArrayList<Product>();
 
@@ -58,6 +59,8 @@ public class PDV1 extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 finalizePurchase();
+
+                    JOptionPane.showMessageDialog(null, "total" + totalValue);
             }
         });
 
@@ -118,7 +121,7 @@ public class PDV1 extends JDialog{
 
     public void impressaoRelatorio(){
 
-
+    
     }
 
     private void updateTotalLabel() {
@@ -138,6 +141,8 @@ public class PDV1 extends JDialog{
     private void setLocale(JFrame parent) {
 
     }
+
+
 
     public void conexãoBanco(){
 

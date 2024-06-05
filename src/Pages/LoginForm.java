@@ -29,12 +29,13 @@ public class LoginForm extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String email = tfEmail.getText();
-                String password = String.valueOf(pfPassword.getPassword());
+                String passw = String.valueOf(pfPassword.getPassword());
 
-                user = getAuthenticatedUser(email, password);
+                user = getAuthenticatedUser(email, passw);
 
                 if(user != null){
-                    dispose();
+                    //dispose();
+                    JOptionPane.showMessageDialog(LoginForm.this,"Usuario autenticado:" + user.name);
                 }
                 else{
                     JOptionPane.showMessageDialog(LoginForm.this,
@@ -49,7 +50,6 @@ public class LoginForm extends JDialog {
             public void actionPerformed(ActionEvent e) {
 
                 dispose();
-
 
             }
         });
@@ -70,7 +70,7 @@ public class LoginForm extends JDialog {
             Connection conn = DriverManager.getConnection(DB_URL, USERNAME,PASSWORD);
 
             Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM users WHERE email=? AND password=?";
+            String sql = "SELECT * FROM usuario WHERE email=? AND passw=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
@@ -82,7 +82,7 @@ public class LoginForm extends JDialog {
                 user.name = resultSet.getString("name");
                 user.email = resultSet.getString("email");
                 user.phone = resultSet.getString("phone");
-                user.passw = resultSet.getString("password");
+                user.passw = resultSet.getString("passw");
             }
 
             stmt.close();
