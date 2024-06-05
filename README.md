@@ -68,7 +68,7 @@ Ao realizar uma consulta na tabela usuário, obtivemos o seguinte retorno.
   
 </div>
 
-<div align="center">
+<div align="justify">
  
 Ao realizar uma consulta a tabela de produtos, obtemos o seguinte resultado.
  
