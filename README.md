@@ -4,7 +4,7 @@ Tela de Login
 
 <div align="center">
 
- src/imagens/Tela01.png
+ ![Tela01](src/imagens/Tela01.png)
   
 </div>
 
