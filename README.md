@@ -39,7 +39,46 @@ A tela PDV tem como objetivo realizar a compra de um produto qualquer, onde o op
  Este é um projeto de exemplo que demonstra como integrar um banco de dados MySQL com uma aplicação Java Swing, utilizando phpMyAdmin para a administração do banco de dados. A figura abaixo mostra a tela inicial do gerenciador do banco de dados do phpMyadmin, observamos que a esquerda está toda as bases de dados, a base de dados do nosso projeto é mystore.
 </div>
 
+<div align="center">
 
+ ![Tela05](src/imagens/Tela05.png)
+  
+</div>
+
+<div align="justify">
+ 
+ Ao expandir a base de dados mystore, notamos as tabelas product e usuário, tabelas essas que foram usadas nos projetos.
+</div>
+
+<div align="center">
+
+ ![Tela06](src/imagens/Tela06.png)
+  
+</div>
+
+<div align="justify">
+
+Ao realizar uma consulta na tabela usuário, obtivemos o seguinte retorno.
+ 
+</div>
+
+<div align="center">
+
+ ![Tela07](src/imagens/Tela07.png)
+  
+</div>
+
+<div align="center">
+ 
+Ao realizar uma consulta a tabela de produtos, obtemos o seguinte resultado.
+ 
+</div>
+
+<div align="center">
+
+ ![Tela08](src/imagens/Tela08.png)
+  
+</div>
 
 <div align="center">
 
