@@ -130,11 +130,12 @@ public class Person extends Catalog {
     }
 
     void action_radio_search(JRadioButton btn,String column,JTextField field,JLabel info){
-        User user =new User();
+
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.select(SQL.TABLE_USER,column,field.getText(),user);
+                User user =new User();
+                Program.query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(user));
             }
         });
@@ -254,8 +255,21 @@ public class Person extends Catalog {
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //...
+                User user = new User();
+                user.set_name(nome.getText());
+                if(adm.isSelected()) user.set_adm(true);
+
+                try {
+                    user.set_uname(username.getText());
+                    user.set_phone(phone.getText());
+                    user.set_email(email.getText());
+                    user.set_passw(senha1.getText(),senha2.getText());
+                }
+                catch (User.Cases_of_Error e)  { JOptionPane.showMessageDialog(null,e.msg()); }
+
+                Program.query.insert(SQL.TABLE_USER,user);
             }
+
         });
 
         cancelar.addActionListener(new ActionListener() {
@@ -521,7 +535,7 @@ public class Person extends Catalog {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.select(SQL.TABLE_USER,column,field.getText(),user);
+                Program.query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(user));
             }
         });
@@ -584,16 +598,21 @@ public class Person extends Catalog {
     }
 
     void action_radio_delete(JRadioButton btn,String column,JTextField field,JLabel info){
-        User user =new User();
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.select(SQL.TABLE_USER,column,field.getText(),user);
-
+                User user =new User();
+                String value = field.getText();
+                Program.query.select(SQL.TABLE_USER,column,value,user);
                 info.setText(make_table_data(user));
+
                 if(!user.get_passw().isEmpty()){
-                    int option = JOptionPane.showConfirmDialog((null),("Deseja excluir"+user.get_name()),(""),JOptionPane.YES_NO_OPTION);
-                    if(option==JOptionPane.YES_OPTION) ;//Query.deletarRegistro();
+                    int option = JOptionPane.showConfirmDialog((null),("Deseja excluir "+user.get_name()),(""),JOptionPane.YES_NO_OPTION);
+                    if(option==JOptionPane.YES_OPTION) {
+                        field.setText("");
+                        btn.setSelected(false);
+                        Program.query.delete(SQL.TABLE_USER,column,value);
+                    }
                 }
             }
         });
@@ -608,17 +627,17 @@ public class Person extends Catalog {
         if(unavilable) return Sys._html
                 +"<br> <br> <br> " +
                     "<div align='center'> Não localizado " + "</div> " +
-                    "<div align='center'> <img src='https://i.pinimg.com/originals/b1/03/3b/b1033bc996c69d3a6003c2fa07281aaf.gif'>  </div> " +
+                    "<br><div align='center'>(｡•́︿•̀｡)</div>"+
                 "<br>"+Sys.html_;
 
         else return Sys._html+
                     "<br><div align='center'>  <u>"+(user.get_name())+"</u> </div> <br>"+
-                    "<table border='2' style='padding:10px '>"+
-                        "<tr style='background-color:#F80'><td> Username </td> <td>"+(user.get_uname())+"</td></tr>"+
-                        "<tr style='background-color:#FF0'><td> Email    </td> <td>"+(user.get_email())+"</td></tr>"+
-                        "<tr style='background-color:#F80'><td> Phone    </td> <td>"+(user.get_phone())+"</td></tr>"+
-                        "<tr style='background-color:#FF0'><td> Cargo    </td> <td>"+(Sys.cargo(user.get_adm()))+"</td></tr>"+
-                        "<tr style='background-color:#F80'><td> Senha    </td> <td> (⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ )</td></tr>"+
+                    "<table border='1'>"+
+                        "<tr style='background-color:#EEE'><td> Username </td> <td>"+(user.get_uname())+"</td></tr>"+
+                        "<tr style='background-color:#AAA'><td> Email    </td> <td>"+(user.get_email())+"</td></tr>"+
+                        "<tr style='background-color:#EEE'><td> Phone    </td> <td>"+(user.get_phone())+"</td></tr>"+
+                        "<tr style='background-color:#AAA'><td> Cargo    </td> <td>"+(Sys.cargo(user.get_adm()))+"</td></tr>"+
+                        "<tr style='background-color:#EEE'><td> Senha    </td> <td> (⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ ⬤ )</td></tr>"+
                     "</table>"+
             Sys.html_
         ;

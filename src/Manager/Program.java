@@ -7,22 +7,26 @@
  ****************************************************************************/
 package Manager;
 import Pages.*;
+import bank.Query;
 import dados.User;
 import javax.swing.*;
 
 
 public class Program {
+    //==================================================================================================================
+    // Field
+    //==================================================================================================================
+    public static Query query = new Query();
     public static User user = new User();
     public static final int
-        MENU     = 0,
-        ADD_USER = 1,
-        ADD_PROD = 2,
-        PDV      = 3,
-        INFO     = 4,
-        DATA     = 5;
+            MENU     = 0,
+            ADD_USER = 1,
+            ADD_PROD = 2,
+            PDV      = 3,
+            INFO     = 4,
+            DATA     = 5;
 
     private static final Sys sys =new Sys();
-
     private static final Sys.Panel[] page = new Sys.Panel[]{
             new Menu(),
             new Person(),
@@ -32,6 +36,9 @@ public class Program {
             new Data()
     };
 
+    //==================================================================================================================
+    // Calls
+    //==================================================================================================================
     public static void start(){
         for (var panel:page) sys.add(panel);
         //login();
@@ -84,4 +91,5 @@ public class Program {
 
         return user;
     }
+    //==================================================================================================================
 }

@@ -20,8 +20,13 @@ public class User implements Archivable {
     boolean adm = false;
 
     private static final String
-            regex_phone = "\\(\\d{2}\\)\\d{5}-\\d{4}",
-            regex_email = "\\w+@\\w+\\.\\w+\\.*\\w*" ;
+            regex_phone =
+                "\\d{2}\\s9\\d{4}-\\d{4}|"+               //< Se há espaço e traço.
+                "\\d{2}9\\d{4}-\\d{4}|"+                  //< Se há traço.
+                "\\d{2}\\s9\\d{4}\\d{4}|"+                //< Se há espaço.
+                "\\d{2}9\\d{4}\\d{4}",                    //< Se não há nem espaço ou traço.,
+            regex_email =
+                "\\w+@\\w+\\.\\w+\\.*\\w*" ;
 
     //==================================================================================================================
     // Build
@@ -53,10 +58,10 @@ public class User implements Archivable {
     public String[] write() {
         String column =
             SQL.COLUMN_NAME +","+
-            SQL.COLUMN_NAME +","+
-            SQL.COLUMN_NAME +","+
-            SQL.COLUMN_NAME +","+
-            SQL.COLUMN_NAME +","+
+            SQL.COLUMN_UNAME +","+
+            SQL.COLUMN_PHONE+","+
+            SQL.COLUMN_EMAIL +","+
+            SQL.COLUMN_PASSW+","+
             SQL.COLUMN_ADM;
 
         String values =
@@ -73,11 +78,19 @@ public class User implements Archivable {
     //==================================================================================================================
     // Exceptions class
     //==================================================================================================================
-    public static class Existing_name  extends Exception{ public String msg(){ return "Este nome já se encontra em uso.";   }}
-    public static class Existing_phone extends Exception{ public String msg(){ return "Este número já se encontra em uso."; }}
-    public static class Existing_email extends Exception{ public String msg(){ return "Este email já se encontra em uso.";  }}
-    public static class Invalid_format extends Exception{ public String msg(){ return "Formato de dado invalido";           }}
-    public static class Sulficient_data extends Exception{ public String msg(){ return "Senha com menos de 6 dígitos.";     }}
+    public static class Cases_of_Error extends Exception{
+        String text;
+        Cases_of_Error(String text){ this.text=text;}
+        public String msg(){ return text;}
+    }
+
+    private static class Existing_name  extends Cases_of_Error { Existing_name(String name){  super((name+" já esta cadastrado."));  }}
+    private static class Existing_phone extends Cases_of_Error { Existing_phone(){ super(("Este número já se encontra em uso."));    }}
+    private static class Existing_email extends Cases_of_Error { Existing_email(){ super(("Este email já se encontra em uso."));     }}
+    private static class Invalid_format extends Cases_of_Error { Invalid_format(String number){ super(("Formato invalido: "+number));}}
+    private static class Insufficient   extends Cases_of_Error{ Insufficient(){ super(("Senha com menos de 6 dígitos"));             }}
+    private static class Incompatible   extends Cases_of_Error{ Incompatible(){ super(("Senhas diferentes"));                        }}
+    private static class Empty_field    extends Cases_of_Error{ Empty_field(String field){ super(("O campo "+field+" está vazio.")); }}
 
     //==================================================================================================================
     // Getting
@@ -95,27 +108,29 @@ public class User implements Archivable {
 
     public void set_adm(boolean adm){ this.adm=adm; }
 
-    public void set_passw(String passw) throws Sulficient_data {
-        if(passw.length()<6) throw new Sulficient_data();
+    public void set_passw(String passw1,String passw2) throws Insufficient,Empty_field {
+        if(passw.length()<6) throw new Insufficient();
+        else if(passw1.isEmpty()) throw new Empty_field("Senha");
+        else if(passw2.isEmpty()) throw new Empty_field("Confirma");
         this.passw = passw;
     }
 
     public void set_uname(String uname) throws Existing_name {
-        if(/*Query.exist(SQL.TABLE_USER, SQL.COLUMN_NAME,uname*/false) throw new Existing_name();
+        //if(/*Query.exist(SQL.TABLE_USER, SQL.COLUMN_NAME,uname*/false) throw new Existing_name();
 
         this.uname=uname;
     }
 
     public void set_phone(String phone) throws Existing_phone,Invalid_format{
-        if(/*Query.exist(SQL.TABLE_USER,SQL.COLUMN_PHONE,phone)*/false ) throw new Existing_phone();
-        else if(!is_phone(phone)) throw new Invalid_format();
+        //if(/*Query.exist(SQL.TABLE_USER,SQL.COLUMN_PHONE,phone)*/false ) throw new Existing_phone();
+        //else if(!is_phone(phone)) throw new Invalid_format();
 
         this.phone=phone;
     }
 
     public void set_email(String email) throws Existing_email,Invalid_format{
-        if(/*Query.exist(SQL.TABLE_USER,SQL.COLUMN_EMAIL,email)*/false ) throw new Existing_email();
-        else if(!is_email(email)) throw new Invalid_format();
+        //if(/*Query.exist(SQL.TABLE_USER,SQL.COLUMN_EMAIL,email)*/false ) throw new Existing_email();
+        //else if(!is_email(email)) throw new Invalid_format();
 
         this.email=email;
     }

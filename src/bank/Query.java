@@ -3,70 +3,67 @@ package bank;
 import java.sql.*;
 
 public class Query{
+    //==================================================================================================================
+    // Field
+    //==================================================================================================================
+    Connection conn;
+    //==================================================================================================================
+    public Query(){
+        try{ conn = DriverManager.getConnection(SQL.URL); }
+        catch (SQLException ignored){}
+    }
 
-    public static void select(String table,String column,String field,Archivable arq){
+    public void end(){
+        try { conn.close(); }
+        catch (SQLException ignored){}
+    }
+
+    public void select(String table,String column,String field,Archivable arq){
         try{
-            String query = "SELECT * FROM "+table+" WHERE "+column+" = ? ;";
-            Connection conn = DriverManager.getConnection(SQL.URL);
-            PreparedStatement pstt = conn.prepareStatement(query);
+            PreparedStatement pstt = conn.prepareStatement(("SELECT * FROM "+table+" WHERE "+column+" = ? ;"));
             pstt.setString(1, field );
             ResultSet result = pstt.executeQuery();
             if(result.next())arq.read(result);
-
-            conn.close();
         }
         catch( SQLException ignored){}
     }
 
-    public static boolean exist(String table,String column,String field){
+    public boolean exist(String table,String column,String field){
 
         try {
-            String query = "SELECT * FROM "+table+" WHERE "+column+" = ? ;";
-            Connection conn = DriverManager.getConnection(SQL.URL);
-            PreparedStatement pstt = conn.prepareStatement(query);
+            PreparedStatement pstt = conn.prepareStatement(("SELECT * FROM "+table+" WHERE "+column+" = ? ;"));
             pstt.setString(1, field);
             ResultSet resultSet = pstt.executeQuery();
-
-            conn.close();
             if (resultSet.next()) return true;
         }
-        catch (SQLException ignored){}
+        catch (SQLException ignored){ return false; }
 
         return false;
     }
 
-    public static void update(String table,String column,String field,Archivable arq){
+    public void update(String table,String column,String field,Archivable arq){
         try{
-            String query = "UPDATE "+table+" SET "+arq.edit()+" WHERE "+column+" = ? ;";
-            Connection conn = DriverManager.getConnection(SQL.URL);
-            PreparedStatement pstt = conn.prepareStatement(query);
+            PreparedStatement pstt = conn.prepareStatement("UPDATE "+table+" SET "+arq.edit()+" WHERE "+column+" = ? ;");
             pstt.setString(1,field);
             pstt.executeUpdate();
-            conn.close();
         }catch (SQLException ignored){}
     }
     
-    public static void delete(String table, String column, String field){
+    public void delete(String table, String column, String field){
         try{
-            String query = " DELETE FROM "+table+" WHERE "+column+" = ? ;";
-            Connection conn = DriverManager.getConnection(SQL.URL);
-            PreparedStatement pstt = conn.prepareStatement(query);
+            PreparedStatement pstt = conn.prepareStatement((" DELETE FROM "+table+" WHERE "+column+" = ? ;"));
             pstt.setString(1,field);
             pstt.executeUpdate();
-            conn.close();
         }catch (SQLException ignored){}
     }
 
-    public static void insert(String table,Archivable arq){
+    public void insert(String table,Archivable arq){
         try {
             String
                 column = arq.write()[Archivable.COLUMN],
                 value  = arq.write()[Archivable.VALUES];
-            String query = "INSERT INTO "+table+" ("+column+") VALUES ("+value+");";
-            Connection conn = DriverManager.getConnection(SQL.URL);
-            PreparedStatement pstt = conn.prepareStatement(query);
+            PreparedStatement pstt = conn.prepareStatement(("INSERT INTO "+table+" ("+column+") VALUES ("+value+");"));
             pstt.executeUpdate();
-            conn.close();
         }catch (SQLException ignored){}
     }
 

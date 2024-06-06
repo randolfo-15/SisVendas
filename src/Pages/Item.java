@@ -135,7 +135,7 @@ public class Item extends Catalog{
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.select(SQL.TABLE_USER,column,field.getText(),user);
+                Program.query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(prd));
             }
         });
@@ -398,7 +398,7 @@ public class Item extends Catalog{
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Query.select(SQL.TABLE_USER,column,field.getText(),user);
+                Program.query.select(SQL.TABLE_USER,column,field.getText(),user);
                 info.setText(make_table_data(prd));
                 if(!user.get_passw().isEmpty()) {
                     int option = JOptionPane.showConfirmDialog((null), ("Deseja excluir" + prd.get_name()), (""), JOptionPane.YES_NO_OPTION);
@@ -491,16 +491,16 @@ public class Item extends Catalog{
         if(unavilable) return Sys._html
                 +"<br> <br> <br> " +
                 "<div align='center'> Não localizado " + "</div> " +
-                "<div align='center'> <img src='https://i.pinimg.com/originals/b1/03/3b/b1033bc996c69d3a6003c2fa07281aaf.gif'>  </div> " +
+                "<br><div align='center'>(｡•́︿•̀｡)</div>"+
                 "<br>"+Sys.html_;
 
         else return Sys._html+
                 "<br><div align='center'>  <u>"+(prd.get_name())+"</u> </div> <br>"+
-                "<table border='2' style='padding:10px '>"+
-                "<tr style='background-color:#F80'><td> Code </td> <td>"+(prd.get_code())+"</td></tr>"+
-                "<tr style='background-color:#FF0'><td> Categoria </td> <td>"+(prd.get_category())+"</td></tr>"+
-                "<tr style='background-color:#F80'><td> Quantidade </td> <td>"+(prd.get_amount())+"</td></tr>"+
-                "<tr style='background-color:#FF0'><td> Valor </td> <td> R$ "+(prd.get_value())+"</td></tr>"+
+                "<table border='1'>"+
+                "<tr style='background-color:#EEE'><td> Code </td> <td>"+(prd.get_code())+"</td></tr>"+
+                "<tr style='background-color:#AAA'><td> Categoria </td> <td>"+(prd.get_category())+"</td></tr>"+
+                "<tr style='background-color:#EEE'><td> Qtd </td> <td>"+(prd.get_amount())+"</td></tr>"+
+                "<tr style='background-color:#AAA'><td> Valor </td> <td> R$ "+(prd.get_value())+"</td></tr>"+
                 "</table>"+
                 Sys.html_
                 ;

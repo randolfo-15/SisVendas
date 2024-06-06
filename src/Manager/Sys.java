@@ -8,10 +8,7 @@
 package Manager;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.*;
@@ -82,6 +79,31 @@ public class Sys extends JFrame {
         setJMenuBar(build_menu());
         setIconImage(new ImageIcon("src/imagens/coin.png").getImage());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent windowEvent) {}
+
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                Program.query.end();
+                System.exit((0));
+            }
+
+            @Override
+            public void windowClosed(WindowEvent windowEvent) {}
+
+            @Override
+            public void windowIconified(WindowEvent windowEvent) {}
+
+            @Override
+            public void windowDeiconified(WindowEvent windowEvent) {}
+
+            @Override
+            public void windowActivated(WindowEvent windowEvent) {}
+
+            @Override
+            public void windowDeactivated(WindowEvent windowEvent) {}
+        });
     }
 
     private void init_component(){
