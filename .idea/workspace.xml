@@ -4,29 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="...">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/bank/Query.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/bank/Query.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_email.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_email.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_name.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_name.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_phone.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_phone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Invalid_format.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Invalid_format.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Sulficient_data.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Sulficient_data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Sys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/Query.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/SisVendas.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/SisVendas.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dados/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/UserTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="..." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -344,7 +322,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716420069421</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="...">
+      <option name="closed" value="true" />
+      <created>1717697422279</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1717697422279</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
