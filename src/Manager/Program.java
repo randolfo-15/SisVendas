@@ -7,9 +7,11 @@
  ****************************************************************************/
 package Manager;
 import Pages.*;
+import Pages.Menu;
 import bank.Query;
 import dados.User;
 import javax.swing.*;
+import java.awt.*;
 
 
 public class Program {
@@ -90,6 +92,13 @@ public class Program {
         user.set_adm(true);
 
         return user;
+    }
+
+    public static void alert(String text){
+        JOptionPane.showMessageDialog(null, text, (""), JOptionPane.PLAIN_MESSAGE, new ImageIcon((Graph.PATH_BTN + "coin.gif")));
+    }
+    public static boolean quest(String name){
+        return (JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog((null),("Deseja excluir "+name),(""),JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE,new ImageIcon((Graph.PATH_BTN+"coin.gif"))));
     }
     //==================================================================================================================
 }

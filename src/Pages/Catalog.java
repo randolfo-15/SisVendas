@@ -30,7 +30,7 @@ public class Catalog extends Sys.Panel {
             new Graph(),
             new Graph("bkg2.jpg"),
             new Graph("bkg2.jpg"),
-            new Graph("bkg2.jpg")
+            new Graph("bkg2.jpg"),
     };
     //==================================================================================================================
     // Build
@@ -50,6 +50,7 @@ public class Catalog extends Sys.Panel {
             tabbed.addTab("Editar",page[EDIT]);
             tabbed.addTab("Remover",page[DEL]);
             tabbed.setFont(new Font("Serif",Font.BOLD,16));
+
             for(var panel : page) panel.setBackground(Sys.frg2);
         }
 

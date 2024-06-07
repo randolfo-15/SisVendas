@@ -10,10 +10,9 @@ public class Info extends Sys.Panel {
     private final String body_00 ="\n" +
             "<br>Projeto dedicado para  disciplinas de LP e POO, focado em desenvolver um e-commerce." +
             "<br>SisVendas – (Sistema de vendas) pretende simular o atendimento de um caixa de supermecado"+
-            "<br>suportando o cadastro de  produtos como  games, peças de computador, " +
-            "<br>camisas de futebol, maquiagens,roupas, calçados, cosméticos, etc." +
-            "<br>O sistema é desenvolvido com Java Desktop, versão 17, utilizando a biblioteca Swing," +
-            "<br>e Mysql como banco de dados.\n";
+            "<br>suportando o cadastro de  produtos como  frutas, comésticos, roupas,e produtos de limpeza"+
+            "<br>O sistema é desenvolvido com Java Desktop,versão 17, utilizando a biblioteca Swing,e Sqlite." +
+            "<br>\n";
 
     JPanel panel = new Graph("bkg2.jpg");
     public Info(){
@@ -22,6 +21,8 @@ public class Info extends Sys.Panel {
     }
 
     public void init(){
+        panel.setBorder(BorderFactory.createRaisedBevelBorder());
+
         JLabel info = Sys.make_text("",20, Color.BLACK);
         info.setText(
                 Sys._html+
@@ -32,6 +33,7 @@ public class Info extends Sys.Panel {
                 Sys.html_
         );
         panel.add(info);
+        panel.add(new JLabel(new ImageIcon((Graph.PATH_BTN+"coin.gif"))));
         work_space.add(panel);
     }
 }

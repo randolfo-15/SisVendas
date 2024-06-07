@@ -1,5 +1,6 @@
 package dados;
 
+import Manager.Program;
 import bank.Archivable;
 import bank.SQL;
 
@@ -34,19 +35,48 @@ public class Product implements Archivable {
 
     @Override
     public String edit() {
-        return "";
+        return
+            SQL.COLUMN_NAME +"='"+name+"',"+
+            SQL.COLUMN_CATEGORY +"='"+ctry+"',"+
+            SQL.COLUMN_CODE +"='"+code+"',"+
+            SQL.COLUMN_VALUE +"="+value+","+
+            SQL.COLUMN_AMOUNT +"="+amount;
     }
 
     @Override
     public String[] write() {
-        return new String[]{};
+        String column =
+            SQL.COLUMN_NAME +","+
+            SQL.COLUMN_CATEGORY +","+
+            SQL.COLUMN_CODE+","+
+            SQL.COLUMN_VALUE +","+
+            SQL.COLUMN_AMOUNT;
+
+        String values =
+            "'"+name+"',"+
+            "'"+ctry+"',"+
+            "'"+code+"',"+
+            "'"+value+"',"+
+            "'"+amount+"'";
+
+        return new String[]{column,values};
+    }
+
+    @Override
+    public void clear() {
+        name   = "";
+        code   = "";
+        ctry   = "";
+        value  = 0.00F;
+        amount = 0;
     }
 
     //==================================================================================================================
     // Exceptions class
     //==================================================================================================================
-    public static class Existing_name extends Exception{ public String msg(){ return "Este nome já se encontra em uso.";   }}
-    public static class Existing_code extends Exception{ public String msg(){ return "Este código já se encontra em uso."; }}
+    public static class Lacking extends Cases_of_Error{ Lacking(){super(("Produto em falta.")); }}
+    public static class Existing_code extends Cases_of_Error{ Existing_code(String code){ super(("O código "+code+" está em uso")); }}
+    public static class Inconsistent extends Cases_of_Error{ Inconsistent(){ super(("Valor incoerente.")); }}
 
     //==================================================================================================================
     // Getting
@@ -59,24 +89,35 @@ public class Product implements Archivable {
     //==================================================================================================================
     // Setting
     //==================================================================================================================
-    public void set_name(String name) throws Existing_name {
-        if(/*Query.exist(SQL.TABLE_PRODUCT,SQL.COLUMN_NAME,name.toUpperCase)*/false ) throw new Existing_name();
-        this.name=name.toUpperCase();
+
+    public void set_name(String name) throws Empty_field {
+        if( name.isEmpty() ) throw new Empty_field("Nome") ;
+        this.name=name;
     }
-    public void set_code(String code) throws Existing_code {
-        if(/*Query.exist(SQL.TABLE_PRODUCT,SQL.COLUMN_CODE,name)*/false ) throw new Existing_code();
+
+    public void set_code(String code) throws Existing_code,Empty_field {
+        if     (                       code.isEmpty()                      ) throw new Empty_field("Code");
+        else if(Program.query.exist(SQL.TABLE_PRODUCT,SQL.COLUMN_CODE,name)) throw new Existing_code(code);
         this.code=code;
     }
 
     public void set_category(String category) { this.ctry=category.toUpperCase(); }
 
-    public void set_value(float value) { this.value=value;   }
+    public void set_value(float value) throws Inconsistent {
+        if( value <= 0) throw  new Inconsistent();
+        this.value=value;
+    }
 
-    public void set_amount(int amount) { this.amount=amount; }
+    public void set_amount(int amount) throws Lacking {
+        if(amount <= 0) throw new Lacking();
+        this.amount=amount;
+    }
 
     //==================================================================================================================
     // Operator
     //==================================================================================================================
     public void more(int n){ amount+=n; }
     public void less(int n){ amount-=n; }
+
+
 }

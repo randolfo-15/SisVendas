@@ -12,6 +12,7 @@ import Manager.Program;
 import Manager.Sys;
 import bank.Query;
 import bank.SQL;
+import dados.Cases_of_Error;
 import dados.Product;
 import dados.User;
 
@@ -27,10 +28,6 @@ public class Item extends Catalog{
         NAME = "Nome",
         CODE = "Code";
 
-    Product product = new Product();
-    User user = new User();
-    private JTextField field ;
-    private JLabel info ;
     private ButtonGroup group = new ButtonGroup();
 
     public Item(){
@@ -38,10 +35,7 @@ public class Item extends Catalog{
         init();
     }
 
-    private void init(){
-        user = Program.get_user_test();
-        init_pages();
-    }
+    private void init(){ init_pages(); }
 
     private void init_pages(){
         init_page_data();
@@ -49,10 +43,6 @@ public class Item extends Catalog{
         init_page_edit();
         init_page_del();
     }
-
-
-    //------------------------------------------------------------------------------------------------------------------
-
 
     //==================================================================================================================
     //  User search
@@ -63,7 +53,6 @@ public class Item extends Catalog{
         JLabel info = Sys.make_text("",30,Color.BLACK);
         ButtonGroup group = new ButtonGroup();
         JTextField field = search_field(group,info);
-
 
         // Campo de busca
         // ===============
@@ -123,7 +112,7 @@ public class Item extends Catalog{
 
             switch (btn.getText()){
                 case NAME: action_radio_search(btn, SQL.COLUMN_NAME,field,info);  break;
-                case CODE: action_radio_search(btn, SQL.COLUMN_EMAIL,field,info);  break;
+                case CODE: action_radio_search(btn, SQL.COLUMN_CODE,field,info);  break;
 
             }
         }
@@ -131,11 +120,11 @@ public class Item extends Catalog{
     }
 
     void action_radio_search(JRadioButton btn,String column,JTextField field,JLabel info){
-        Product prd = new Product();
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Program.query.select(SQL.TABLE_USER,column,field.getText(),user);
+                Product prd = new Product();
+                Program.query.select(SQL.TABLE_PRODUCT,column,field.getText(),prd);
                 info.setText(make_table_data(prd));
             }
         });
@@ -185,14 +174,6 @@ public class Item extends Catalog{
         pnl_07.add(cancelar);
         pnl_00.add(pnl_07);
 
-
-        salvar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                //...
-            }
-        });
-
         cancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -201,8 +182,30 @@ public class Item extends Catalog{
                 code.setText("");
                 value.setText("");
                 amount.setText("");
+                group.clearSelection();
             }
 
+        });
+
+        salvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    Product prd = new Product();
+                    prd.set_name(nome.getText());
+                    prd.set_code(code.getText());
+                    prd.set_category(ctry.getText());
+                    float price = (value.getText().isEmpty())?0.00F:Float.parseFloat(value.getText());
+                    prd.set_value(price);
+                    int qtd = (amount.getText().isEmpty())?0:Integer.parseInt(amount.getText());
+                    prd.set_amount(qtd);
+
+                    Program.query.insert(SQL.TABLE_PRODUCT,prd);
+                    cancelar.doClick();
+                    Program.alert("Produto cadastrado com sucesso.");
+                }
+                catch (Cases_of_Error e)  { Program.alert(e.msg()); }
+            }
         });
 
         page[NEW].setLayout(new BorderLayout());
@@ -240,13 +243,23 @@ public class Item extends Catalog{
     //==================================================================================================================
     // Editar
     //==================================================================================================================
+    JTextField
+            nome = make_textfield(37),
+            code = make_textfield(15),
+            ctry = make_textfield(15),
+            value = make_textfield(20),
+            amount = make_textfield(10);
+
+    Product old =new Product();
+    JPanel pnl_01_00 = new JPanel();
+    JPanel pnl_00 = new JPanel(new GridLayout(5,1));
+
     private void init_page_edit(){
         page[EDIT].setLayout(new BorderLayout());
 
         JLabel info = Sys.make_text("",30,Color.BLACK);
         ButtonGroup group = new ButtonGroup();
         JTextField field = search_field(group,info);
-
 
         // Campo de busca
         // ===============
@@ -256,18 +269,9 @@ public class Item extends Catalog{
         pnl_00_00.add(new JLabel(new ImageIcon((Graph.PATH_IMG+"lupa.png"))));
         pnl_00_00.add(Sys.make_text("Buscar por: ",18,Color.BLACK));
         pnl_00_00.add(field);
-        pnl_00_00.add(make_radio_search(group,field,info));
+        pnl_00_00.add(make_radio_update(group,field,info));
 
-        JTextField
-                nome = make_textfield(37),
-                code = make_textfield(15),
-                ctry = make_textfield(15),
-                value = make_textfield(20),
-                amount = make_textfield(10);
-
-        JPanel pnl_00 = new JPanel(new GridLayout(5,1));
         pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
-
         pnl_00.add(make_text("Editar Produto"));
 
         JPanel pnl_01 = create_panel();
@@ -302,7 +306,19 @@ public class Item extends Catalog{
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //...
+                try {
+                    Product prd = new Product();
+                    prd.set_name(nome.getText());
+                    prd.set_code(code.getText());
+                    prd.set_category(ctry.getText());
+                    prd.set_value(Float.parseFloat(value.getText()));
+                    prd.set_amount(Integer.parseInt(amount.getText()));
+
+                    Program.query.update(SQL.TABLE_PRODUCT,SQL.COLUMN_CODE,old.get_code(),prd);
+                    cancelar.doClick();
+                    Program.alert(("Produto modificado com sucesso."));
+                }
+                catch (Cases_of_Error e)  { Program.alert(e.msg()); }
             }
         });
 
@@ -314,24 +330,26 @@ public class Item extends Catalog{
                 code.setText("");
                 value.setText("");
                 amount.setText("");
+                group.clearSelection();
             }
-
         });
 
 
         // Campo de Resultado
         // ===================
-        //JPanel pnl_01 = new Graph(BKG_00);
-        //pnl_01.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        //pnl_01.add(info);
+        pnl_01_00.setBackground(new Color(0,0,0,0));
+        pnl_01_00.add(info);
 
+        pnl_00.setVisible(false);
+        pnl_01_00.setVisible(false);
 
         JPanel edition = new JPanel();
         edition.setBackground(new Color(0,0,0,0));
         edition.setLayout(new BoxLayout(edition,BoxLayout.Y_AXIS));
         edition.add(Box.createHorizontalStrut(110));
         edition.add(pnl_00);
+        edition.add(pnl_01_00);
 
         // Plugs
         // =====
@@ -342,6 +360,48 @@ public class Item extends Catalog{
         page[EDIT].add(Box.createVerticalStrut(200),BorderLayout.SOUTH);
     }
 
+    private JPanel make_radio_update(ButtonGroup group,JTextField field,JLabel info){
+        JPanel pnl = new JPanel();
+        JRadioButton[] radio = new JRadioButton[]{
+                new JRadioButton(NAME),
+                new JRadioButton(CODE),
+        };
+        for(var btn : radio) {
+            Sys.make_component(btn);
+            pnl.add(btn);
+            group.add(btn);
+
+            switch (btn.getText()){
+                case NAME: action_radio_update(btn, SQL.COLUMN_NAME,field,info);  break;
+                case CODE: action_radio_update(btn, SQL.COLUMN_CODE,field,info);  break;
+
+            }
+        }
+        return pnl;
+    }
+    void action_radio_update(JRadioButton btn,String column,JTextField field,JLabel info){
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                old.clear();
+                Program.query.select(SQL.TABLE_PRODUCT,column,field.getText(),old);
+
+
+                pnl_00.setVisible(!old.get_code().isEmpty());
+                pnl_01_00.setVisible(old.get_code().isEmpty());
+
+                nome.setText(old.get_name());
+                code.setText(old.get_code());
+                ctry.setText(old.get_category());
+                value.setText(old.get_value()+"");
+                amount.setText(old.get_amount()+"");
+
+                info.setText(make_table_data(old));
+            }
+        });
+    }
+
+    //==================================================================================================================
     private void init_page_del(){
         page[DEL].setLayout(new BorderLayout());
 
@@ -387,23 +447,26 @@ public class Item extends Catalog{
             switch (btn.getText()){
                 case NAME: action_radio_delete(btn, SQL.COLUMN_NAME,field,info);  break;
                 case CODE: action_radio_delete(btn, SQL.COLUMN_EMAIL,field,info);  break;
-
             }
         }
         return pnl;
     }
 
     void action_radio_delete(JRadioButton btn,String column,JTextField field,JLabel info){
-        Product prd = new Product();
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Program.query.select(SQL.TABLE_USER,column,field.getText(),user);
+                Product prd = new Product();
+                String value = field.getText();
+                Program.query.select(SQL.TABLE_PRODUCT,column,value,prd);
                 info.setText(make_table_data(prd));
-                if(!user.get_passw().isEmpty()) {
-                    int option = JOptionPane.showConfirmDialog((null), ("Deseja excluir" + prd.get_name()), (""), JOptionPane.YES_NO_OPTION);
-                    if (option == JOptionPane.YES_OPTION) ;//Query.deletarRegistro();
-                }
+
+                if(!prd.get_code().isEmpty())
+                    if(Program.quest(prd.get_name())){
+                        field.setText("");
+                        btn.setSelected(false);
+                        Program.query.delete(SQL.TABLE_PRODUCT,column,value);
+                    }
             }
         });
     }
@@ -411,81 +474,6 @@ public class Item extends Catalog{
     //==================================================================================================================
     //  Functions
     //==================================================================================================================
-    private JTextField make_textfield(){
-        JTextField in = new JTextField(30);
-        in.setFont(new Font("Serif",Font.BOLD,18));
-        in.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
-
-            @Override
-            public void removeUpdate(DocumentEvent documentEvent) { group.clearSelection(); }
-
-            @Override
-            public void changedUpdate(DocumentEvent documentEvent) {}
-        });
-        return in;
-    }
-
-
-    private JPasswordField make_text_passw(){
-        JPasswordField in = new JPasswordField(40);
-        in.setFont(new Font("Serif",Font.BOLD,18));
-        return in;
-    }
-
-    private JPanel make_radio_search(){
-        JPanel pnl_00 = new JPanel();
-        JRadioButton
-                name  = new JRadioButton("Nome"),
-                email = new JRadioButton("Email"),
-                phone = new JRadioButton("Phone");
-
-
-        Sys.make_component(name);
-        Sys.make_component(email);
-        Sys.make_component(phone);
-
-        group.add(name);
-        group.add(email);
-        group.add(phone);
-
-        name.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                /*user = Query.buscaPorUname(field.getText());*/
-                user.name="Pedro Henrique";
-                user.uname="PP";
-                user.phone="(31) 98105-9111";
-                user.email="pedro@gmail.com";
-                user.set_adm(false);
-                info.setText(make_table_data(new Product()));
-            }
-        });
-
-        email.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                /*user = Query.buscaPorEmail(field.getText());*/
-                JOptionPane.showMessageDialog(null,"Busca por email");
-            }
-        });
-
-        phone.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                /*user = Query.buscaPorPhone(field.getText());*/
-                JOptionPane.showMessageDialog(null,"Busca por phone");
-            }
-        });
-
-        pnl_00.add(name);
-        pnl_00.add(email);
-        pnl_00.add(phone);
-
-        return pnl_00;
-    }
-
     private String make_table_data(Product prd){
         boolean unavilable = prd.get_code().isEmpty();
         if(unavilable) return Sys._html

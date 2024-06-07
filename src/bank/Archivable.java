@@ -11,4 +11,5 @@ public interface Archivable {
     public void read(ResultSet result) throws SQLException;
     public String edit();
     public String[] write();
+    public void clear();
 }

@@ -12,6 +12,7 @@ import Manager.Program;
 import Manager.Sys;
 import bank.Query;
 import bank.SQL;
+import dados.Cases_of_Error;
 import dados.User;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -24,7 +25,6 @@ public class Person extends Catalog {
     //==================================================================================================================
     // Field
     //==================================================================================================================
-    private User user = new User();
     private final String
         NAME  = "Nome",
         PHONE = "Phone",
@@ -40,10 +40,7 @@ public class Person extends Catalog {
     //==================================================================================================================
     //  Method
     //==================================================================================================================
-    private void init(){
-        user = Program.get_user_test();
-        init_pages();
-    }
+    private void init(){ init_pages(); }
 
     private void init_pages(){
         init_page_data();
@@ -61,7 +58,6 @@ public class Person extends Catalog {
         JLabel info = Sys.make_text("",30,Color.BLACK);
         ButtonGroup group = new ButtonGroup();
         JTextField field = search_field(group,info);
-
 
         // Campo de busca
         // ===============
@@ -107,6 +103,7 @@ public class Person extends Catalog {
         });
         return in;
     }
+
 
     private JPanel make_radio_search(ButtonGroup group,JTextField field,JLabel info){
         JPanel pnl = new JPanel();
@@ -255,19 +252,20 @@ public class Person extends Catalog {
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                User user = new User();
-                user.set_name(nome.getText());
-                if(adm.isSelected()) user.set_adm(true);
-
                 try {
+                    User user = new User();
+                    user.set_name(nome.getText());
                     user.set_uname(username.getText());
-                    user.set_phone(phone.getText());
                     user.set_email(email.getText());
+                    user.set_phone(phone.getText());
                     user.set_passw(senha1.getText(),senha2.getText());
-                }
-                catch (User.Cases_of_Error e)  { JOptionPane.showMessageDialog(null,e.msg()); }
+                    if(adm.isSelected()) user.set_adm(true);
 
-                Program.query.insert(SQL.TABLE_USER,user);
+                    Program.query.insert(SQL.TABLE_USER,user);
+                    cancelar.doClick();
+                    Program.alert("Usuário cadastrado com sucesso.");
+                }
+                catch (Cases_of_Error e)  { Program.alert(e.msg()); }
             }
 
         });
@@ -281,6 +279,7 @@ public class Person extends Catalog {
                 phone.setText("");
                 senha1.setText("");
                 senha2.setText("");
+                func.clearSelection();
             }
 
         });
@@ -341,13 +340,34 @@ public class Person extends Catalog {
             flag_02 = true,
             flag_03 = true;
 
+    JTextField
+            nome = make_textfield(),
+            username = make_textfield(),
+            email = make_textfield(),
+            phone = make_textfield();
+    JPasswordField
+            senha1 = make_text_passw(36),
+            senha2 = make_text_passw(36);
+
+    JRadioButton
+            adm = new JRadioButton("Administrador"),
+            cx  = new JRadioButton("Caixa");
+
+    User old = new User();
+
+    JPanel pnl_00 = new JPanel(new GridLayout(9,1));
+    JPanel pnl_01_00 = new JPanel();
+
     private void init_page_edit(){
         page[EDIT].setLayout(new BorderLayout());
 
-        JLabel info = Sys.make_text("",30,Color.BLACK);
-        ButtonGroup group = new ButtonGroup();
-        JTextField field = search_field(group,info);
+        JButton
+                eye_00 = make_eye_btn(),
+                eye_01 = make_eye_btn();
 
+        ButtonGroup group = new ButtonGroup();
+        JLabel info = Sys.make_text("",30,Color.BLACK);
+        JTextField field = search_field(group,info);
 
         // Campo de busca
         // ===============
@@ -359,29 +379,14 @@ public class Person extends Catalog {
         pnl_00_00.add(field);
         pnl_00_00.add(make_radio_update(group,field,info));
 
-        JTextField
-                nome = make_textfield(),
-                username = make_textfield(),
-                email = make_textfield(),
-                phone = make_textfield();
-        JPasswordField
-                senha1 = make_text_passw(36),
-                senha2 = make_text_passw(36);
-        JButton
-                eye_00 = make_eye_btn(),
-                eye_01 = make_eye_btn();
-
         ButtonGroup func = new ButtonGroup();
-        JRadioButton
-                adm = new JRadioButton("Administrador"),
-                cx  = new JRadioButton("Caixa");
 
         adm.setFont(new Font("Serif",Font.BOLD,16));
         cx.setFont(new Font("Serif",Font.BOLD,16));
         func.add(adm);
         func.add(cx);
 
-        JPanel pnl_00 = new JPanel(new GridLayout(9,1));
+        pnl_00.setVisible(false);
         pnl_00.setBorder(BorderFactory.createRaisedBevelBorder());
         pnl_00.add(make_text("Editar Usuário"));
 
@@ -390,7 +395,6 @@ public class Person extends Catalog {
         pnl_10.add(Box.createHorizontalStrut(30));
         pnl_10.add(cx);
         pnl_00.add(pnl_10);
-
 
         JPanel pnl_01 = create_panel();
         pnl_01.add(make_text("Nome"));
@@ -466,7 +470,21 @@ public class Person extends Catalog {
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //...
+                try {
+                    User user = new User();
+                    user.changer_name(nome.getText());
+                    user.changer_uname(username.getText());
+                    user.changer_email(email.getText());
+                    user.changer_phone(phone.getText());
+                    user.set_passw(senha1.getText(),senha2.getText());
+                    if(adm.isSelected()) user.set_adm(true);
+                    else user.set_adm(false);
+
+                    Program.query.update(SQL.TABLE_USER,SQL.COLUMN_PHONE,old.get_phone(),user);
+                    cancelar.doClick();
+                    Program.alert("Usuário modificado com sucesso.");
+                }
+                catch (Cases_of_Error e)  { Program.alert(e.msg()); }
             }
         });
 
@@ -479,6 +497,8 @@ public class Person extends Catalog {
                 phone.setText("");
                 senha1.setText("");
                 senha2.setText("");
+                group.clearSelection();
+                func.clearSelection();
             }
 
         });
@@ -492,10 +512,14 @@ public class Person extends Catalog {
 
         // Campo de Resultado
         // ===================
-        //JPanel pnl_01 = new Graph(BKG_00);
-        //pnl_01.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        //pnl_01.add(info);
+        pnl_01_00.setBorder(BorderFactory.createRaisedBevelBorder());
+
+        pnl_01_00.add(info);
+        pnl_01_00.setBackground(new Color(0,0,0,0));
+        pnl_01_00.setVisible(false);
+
+        edition.add(pnl_01_00);
 
         // Plugs
         // =====
@@ -531,12 +555,25 @@ public class Person extends Catalog {
     }
 
     void action_radio_update(JRadioButton btn,String column,JTextField field,JLabel info){
-        User user =new User();
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Program.query.select(SQL.TABLE_USER,column,field.getText(),user);
-                info.setText(make_table_data(user));
+                old.clear();
+                Program.query.select(SQL.TABLE_USER,column,field.getText(),old);
+
+
+                pnl_00.setVisible(!old.get_passw().isEmpty());
+                pnl_01_00.setVisible(old.get_passw().isEmpty());
+
+                if(old.get_adm()) adm.setSelected(true);
+                else cx.setSelected(true);
+                nome.setText(old.get_name());
+                username.setText(old.get_uname());
+                phone.setText(old.get_phone());
+                email.setText(old.get_email());
+                senha1.setText(old.get_passw());
+                senha2.setText(old.get_passw());
+                info.setText(make_table_data(old));
             }
         });
     }
@@ -606,14 +643,12 @@ public class Person extends Catalog {
                 Program.query.select(SQL.TABLE_USER,column,value,user);
                 info.setText(make_table_data(user));
 
-                if(!user.get_passw().isEmpty()){
-                    int option = JOptionPane.showConfirmDialog((null),("Deseja excluir "+user.get_name()),(""),JOptionPane.YES_NO_OPTION);
-                    if(option==JOptionPane.YES_OPTION) {
+                if(!user.get_passw().isEmpty())
+                    if(Program.quest(user.get_name())) {
                         field.setText("");
                         btn.setSelected(false);
                         Program.query.delete(SQL.TABLE_USER,column,value);
                     }
-                }
             }
         });
     }

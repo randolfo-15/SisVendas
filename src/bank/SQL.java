@@ -3,11 +3,13 @@ package bank;
 public class SQL {
 
     public static final String
-            /* Table */
+            //  Table
+            // =======
             TABLE_USER    = "User",
             TABLE_PRODUCT = "Product",
 
-            /* Columns */
+            //  Columns
+            // =========
             COLUMN_NAME = "name",
             COLUMN_UNAME = "uname",
             COLUMN_PHONE = "phone",
@@ -16,9 +18,8 @@ public class SQL {
             COLUMN_ADM      = "adm",
             COLUMN_CODE     = "code",
             COLUMN_CATEGORY = "category",
-            COLUMN_VALUE    = "value",
+            COLUMN_VALUE    = "price",
             COLUMN_AMOUNT   = "amount";
-
 
             public static final String URL = "jdbc:sqlite:src/bank/SisVendas.db";
             public static final String USER = "";
