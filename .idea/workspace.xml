@@ -4,63 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="...">
-      <change afterPath="$PROJECT_DIR$/src/dados/Cases_of_Error.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dados/Empty_field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Manager/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Manager/Program.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Catalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Catalog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/Pages/Person.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/bank/SQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/bank/SQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/bank/SisVendas.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/bank/SisVendas.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/bank/rules.sql" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/bank/rules.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/Product$Existing_code.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/Product$Existing_code.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/Product$Existing_name.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Cases_of_Error.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_email.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_email.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_name.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_name.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_phone.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Existing_phone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Invalid_format.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Invalid_format.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User$Sulficient_data.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SisVendas/dados/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SisVendas/dados/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Catalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Catalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Archivable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/Archivable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/SQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/SQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/SisVendas.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/SisVendas.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/rules.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/rules.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dados/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dados/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dados/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dados/a.java" beforeDir="false" />
-    </list>
+    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="..." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -386,7 +330,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717697422279</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="...">
+      <option name="closed" value="true" />
+      <created>1717779046418</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1717779046418</updated>
+    </task>
+    <task id="LOCAL-00031" summary="...">
+      <option name="closed" value="true" />
+      <created>1717779085555</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1717779085555</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
