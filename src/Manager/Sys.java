@@ -106,11 +106,18 @@ public class Sys extends JFrame {
         });
     }
 
+    private String[] names_btn = new String[]{
+      "Usuários",
+      "Produtos",
+      "Ponto de venda",
+      "Informações",
+      "Bem vindo"
+    };
     private void init_component(){
         int last = size_btn - 1;
         for(int i=0;i<size_btn;i++) {
             if(i==last) menu.add(Box.createHorizontalGlue());
-            btn[i] = build_btn(image_btn[i]);
+            btn[i] = build_btn(image_btn[i],names_btn[i]);
             menu.add(Box.createHorizontalStrut(20));
             menu.add(btn[i]);
             menu.add(Box.createHorizontalStrut(20));
@@ -125,7 +132,7 @@ public class Sys extends JFrame {
         buffer.setBackground(bkg);
     }
 
-    public static JButton build_btn(String path){
+    public static JButton build_btn(String path,String name){
         JButton btn = new JButton();
         btn.setIcon(new ImageIcon("src/imagens/btns/"+path));
 
@@ -147,6 +154,7 @@ public class Sys extends JFrame {
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
                 btn.setBorder(BorderFactory.createTitledBorder("   "));
+                btn.setToolTipText(name);
                 //btn.setBackground(Color.ORANGE);
             }
 
@@ -218,6 +226,8 @@ public class Sys extends JFrame {
 
     public static final String _html = "<html> <body>";
     public static final String html_ = "</body> </html>";
+
+
     //==================================================================================================================
     // Build
     //==================================================================================================================
@@ -282,6 +292,7 @@ public class Sys extends JFrame {
                 new JPanel(new BorderLayout()), //< NORTH
                 new JPanel(new BorderLayout())  //< SOUTH
         };
+        private JLabel label_user = make_text("",20,Color.WHITE);
         //==============================================================================================================
         // Build
         //==============================================================================================================
@@ -294,6 +305,7 @@ public class Sys extends JFrame {
             border();
 
             lock.setIcon(new ImageIcon("src/imagens/btns/changer_user.png"));
+            lock.setToolTipText("Trocar de Usuário");
             lock.setFocusPainted(false);
             lock.setBorderPainted(false);
             lock.setContentAreaFilled(false);
@@ -301,11 +313,7 @@ public class Sys extends JFrame {
 
             lock.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    Program.login();
-                    // ...
-                    init_display();
-                }
+                public void actionPerformed(ActionEvent actionEvent) { Program.start(); }
             });
 
             SwingUtilities.invokeLater(new Runnable() {
@@ -358,10 +366,13 @@ public class Sys extends JFrame {
                 space[i].setBackground(bkg);
             }
 
+
+            label_user.setText("    "+Program.user_name());
+
             space[SOUTH].add(clock  , BorderLayout.EAST);
             space[SOUTH].add(marca(),BorderLayout.WEST);
             space[NORTH].add(lock,BorderLayout.EAST);
-            space[NORTH].add(user(),BorderLayout.WEST);
+            space[NORTH].add(label_user,BorderLayout.WEST);
 
             add( space[NORTH],       BorderLayout.NORTH  );
             add( space[WEST],        BorderLayout.WEST   );
@@ -380,7 +391,7 @@ public class Sys extends JFrame {
             return btn;
         }
         private JLabel marca(){return make_text("     SisVendas",20,frg1); }
-        private JLabel user(){ return make_text("     "+Program.user_name(),20,frg1);}
+
 
         private JButton build_btn_close(){
             JButton close = make_btn("src/imagens/close.png");

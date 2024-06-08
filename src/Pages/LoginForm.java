@@ -34,7 +34,10 @@ public class LoginForm extends JDialog {
 
                 if(!user.get_passw().isEmpty()){
                     state = true;
+                    tfEmail.setText("");
+                    pfPassword.setText("");
                     dispose();
+
                 }
                 else {
                     state = false;
