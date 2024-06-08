@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="...">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Manager/Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager/Sys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Catalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Catalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/LoginForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/SisVendas.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/SisVendas.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/rules.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/bank/rules.sql" afterDir="false" />
-    </list>
+    <list default="true" id="428af8fd-17f3-487d-a08c-e4d2004d9207" name="Changes" comment="..." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -364,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717779153120</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="...">
+      <option name="closed" value="true" />
+      <created>1717813338815</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1717813338815</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

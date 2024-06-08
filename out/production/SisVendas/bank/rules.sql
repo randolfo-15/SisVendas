@@ -4,7 +4,7 @@ CREATE TABLE User (
   uname TEXT        NOT NULL,
   email TEXT        UNIQUE NOT NULL,
   phone VARCHAR(18) UNIQUE NOT NULL,
-  passw TEXT        UNIQUE NOT NULL,
+  passw TEXT        NOT NULL,
   adm   INTEGER     DEFAULT 0
 );
 
