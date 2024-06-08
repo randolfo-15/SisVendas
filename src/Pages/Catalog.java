@@ -8,6 +8,7 @@
 package Pages;
 
 import Manager.Graph;
+import Manager.Program;
 import Manager.Sys;
 
 import javax.swing.*;
@@ -37,18 +38,18 @@ public class Catalog extends Sys.Panel {
     //==================================================================================================================
         public Catalog(String name){
             super(name);
-            init_tabs();
+            init_tabs(Program.login.get_user().get_adm());
             plug();
         }
 
     //==================================================================================================================
     // Initialization
     //==================================================================================================================
-        private void init_tabs(){
+        private void init_tabs(boolean adm){
             tabbed.addTab("Dados",page[DATA]);
-            tabbed.addTab("Novo",page[NEW]);
-            tabbed.addTab("Editar",page[EDIT]);
-            tabbed.addTab("Remover",page[DEL]);
+            if(adm) tabbed.addTab("Novo",page[NEW]);
+            if(adm) tabbed.addTab("Editar",page[EDIT]);
+            if(adm) tabbed.addTab("Remover",page[DEL]);
             tabbed.setFont(new Font("Serif",Font.BOLD,16));
 
             for(var panel : page) panel.setBackground(Sys.frg2);

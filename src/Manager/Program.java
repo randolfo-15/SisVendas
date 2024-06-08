@@ -18,9 +18,11 @@ public class Program {
     //==================================================================================================================
     // Field
     //==================================================================================================================
-    public static Query query = new Query();
-    public static User user = new User();
-    public static final int
+    public static Query     query = new Query();
+    public static LoginForm login = new LoginForm(null);
+    private static User user = new User();
+
+    private static final int
             MENU     = 0,
             ADD_USER = 1,
             ADD_PROD = 2,
@@ -28,24 +30,32 @@ public class Program {
             INFO     = 4,
             DATA     = 5;
 
-    private static final Sys sys =new Sys();
-    private static final Sys.Panel[] page = new Sys.Panel[]{
-            new Menu(),
-            new Person(),
-            new Item(),
-            new Menu(),
-            new Info(),
-            new Data()
-    };
+    private static Sys sys = null;
+    private static final Sys.Panel[] page = new Sys.Panel[6];
 
     //==================================================================================================================
     // Calls
     //==================================================================================================================
     public static void start(){
-        for (var panel:page) sys.add(panel);
-        //login();
-        //user = get_user_test();
-        sys.call(page[MENU].ID);
+        if(login()){
+            user = login.get_user();
+
+            sys = new Sys();
+            page[MENU]     = new Menu();
+            page[ADD_USER] = new Person();
+            page[ADD_PROD] = new Item();
+            page[PDV]      = new Menu();
+            page[INFO]     = new Info();
+            page[DATA]     = new Data();
+
+            for (var panel:page) sys.add(panel);
+            sys.call(page[MENU].ID);
+        }
+    }
+
+    public static boolean login(){
+        login.start();
+        return login.get_state();
     }
 
     public static void call_menu(){
@@ -74,24 +84,13 @@ public class Program {
         //sys.call(page[DATA].ID);
     }
 
-    public static void login(){
-        new LoginForm(null);
-        user = LoginForm.usuarioAtual();
-    }
+
 
     public  static String user_name(){
+        System.out.println(user.get_name());
+        System.out.println(user.get_uname());
+        System.out.println(user.get_email());
         return ((user.get_adm())?"Ad":"Cx")+": "+user.get_name();
-    }
-
-    public static User get_user_test(){
-
-        user.name="Randolfo A Goncalves";
-        user.uname="Rag";
-        user.phone="(31) 98105-9465";
-        user.email="randolfo@gmail.com";
-        user.set_adm(true);
-
-        return user;
     }
 
     public static void alert(String text){

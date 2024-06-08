@@ -299,12 +299,12 @@ public class Sys extends JFrame {
             lock.setContentAreaFilled(false);
             lock.setOpaque(false);
 
-
-
             lock.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    JOptionPane.showMessageDialog(null,"LOCK");
+                    Program.login();
+                    // ...
+                    init_display();
                 }
             });
 
@@ -369,8 +369,6 @@ public class Sys extends JFrame {
             add( space[EAST],        BorderLayout.EAST   );
             add( space[SOUTH],       BorderLayout.SOUTH  );
         }
-
-
 
         private JButton make_btn(String path){
             JButton btn = new JButton(new ImageIcon(path));

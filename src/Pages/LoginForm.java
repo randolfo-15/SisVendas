@@ -1,5 +1,7 @@
 package Pages;
 
+import Manager.Program;
+import bank.SQL;
 import dados.User;
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,8 @@ public class LoginForm extends JDialog {
     private JPasswordField pfPassword;
     private JButton btnOK;
     private JButton btnCancel;
+    private static User user = new User();
+    private static boolean state = false;
 
     public LoginForm(JFrame parent){
         super(parent);
@@ -22,101 +26,44 @@ public class LoginForm extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        //setVisible(true);
 
         btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String email = tfEmail.getText();
-                String password = String.valueOf(pfPassword.getPassword());
+                user = getAuthenticatedUser(tfEmail.getText(), String.valueOf(pfPassword.getPassword()));
 
-                user = getAuthenticatedUser(email, password);
-
-                if(user != null){
+                if(!user.get_passw().isEmpty()){
+                    state = true;
                     dispose();
                 }
-                else{
-                    JOptionPane.showMessageDialog(LoginForm.this,
-                            "Email or password invalid",
-                            "Try again",
-                            JOptionPane.ERROR_MESSAGE);
+                else {
+                    state = false;
+                    Program.alert(("Senha ou username incorreto."));
                 }
+
             }
         });
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 dispose();
-
-
             }
         });
-
-        setVisible(true);
     }
 
-    private static User user;
+    public void start(){ setVisible(true); }
 
-    private User getAuthenticatedUser(String email, String password){
+    public void stop(){ setVisible(false); }
 
-        User user = null;
-        final String DB_URL = "jdbc:mysql://localhost/mystore?serverTimezone=UTC";
-        final String USERNAME = "root";
-        final String PASSWORD = "";
+    public User get_user(){ return user;}
 
-        try{
-            Connection conn = DriverManager.getConnection(DB_URL, USERNAME,PASSWORD);
+    public boolean get_state(){ return state; }
 
-            Statement stmt = conn.createStatement();
-
-
-            String sql = "SELECT * FROM users WHERE email=? AND password=?";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()){
-                user = new User();
-                user.name = resultSet.getString("name");
-                user.email = resultSet.getString("email");
-                user.phone = resultSet.getString("phone");
-                user.passw = resultSet.getString("password");
-            }
-
-            stmt.close();
-            conn.close();
-
-        }catch (Exception e){
-            System.out.println("Erro");
-            //e.printStackTrace();
-
-        }
-
+    private User getAuthenticatedUser(String uname, String password){
+        user.clear();
+        Program.query.select(SQL.TABLE_USER,SQL.COLUMN_UNAME,uname,user);
         return user;
     }
 
-    public static void main(String[] args) {
-        LoginForm loginForm = new LoginForm(null);
-        User user = loginForm.user;
 
-        if(user!= null){
-            System.out.println("Sucessful Authentication: " + user.name);
-            System.out.println("Email: " + user.email);
-            System.out.println("Phone: " + user.phone);
-
-        }
-        else{
-
-            System.out.println("Authentication canceled");
-        }
-    }
-
-    public static User usuarioAtual(){
-
-        return user;
-    }
 }
