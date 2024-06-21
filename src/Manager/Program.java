@@ -52,7 +52,7 @@ public class Program {
             page.add( new Menu()   );
             page.add( new Person() );
             page.add( new Item()   );
-            page.add( new Menu()   );
+            page.add( new PDV()   );
             page.add( new Info()   );
             page.add( new Data()   );
 
@@ -99,6 +99,10 @@ public class Program {
     }
     public static boolean quest(String name){
         return (JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog((null),("Deseja excluir "+name),(""),JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE,new ImageIcon((Graph.PATH_BTN+"coin.gif"))));
+    }
+
+    public static boolean quest_x(String name){
+        return (JOptionPane.YES_OPTION==JOptionPane.showConfirmDialog((null),(name),(""),JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE,new ImageIcon((Graph.PATH_BTN+"coin.gif"))));
     }
     //==================================================================================================================
 }
