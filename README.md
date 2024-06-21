@@ -36,39 +36,20 @@ SisVendas oferece uma interface intuitiva para o gerenciamento de produtos e usu
 ![pdv](img/login.png)
 
 #### Usuários do tipo Administrador possuem total controle sobre o sistema, que implica em cadastrar e modificar produtos e usuários, enquanto os do tipo caixa so podem fazer pesquisas.
-
+_____
 
 ## Instalação
 
 ### Observação
 Este programa foi escrito para ser usado em um ambiente linux, no entanto seu código fonte
-se encontra na pasta *src* para outros formatos de compilação.
+se encontra na pasta *src* para outros formatos de compilação, Utilize a plataforma intellij
+para simplificar seu ciclo de construção
 
 
-### Instalação Linux
+## Configure dependências:
 
-Ao adentrar a pasta do projeto dígite:
+![pdv](img/dep.png)
 
-``` bash
-    # 1° passo:
-    make
-    # 2° passo:
-    make run
-    # Caso queira gerar um arquivo .jar:
-    make jar
-```
+## Inicie a construção da solução
 
-## Como jogar no Zebra de ouro:
-Após instalar o programa e selecionar uma modalidade siga as recomendações do game
-escolhido.
-
-### Ex (LotoFacil):
-Escolha alguns números e aperte play:
-
-![placar](rec/images/placar.jpg)
-
-#### caso queira alterar uma casa selecionada é so clicar nela novamente.
-
-## Caso deseje alterar o números de casas selecionadas, altere o slider:
-
-![nivel](rec/images/nivel.jpg)
+![play](img/play.png)
