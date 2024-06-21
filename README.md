@@ -1,6 +1,6 @@
-# Loto Fácil
+# SisVendas
 
-![Loteria](rec/images/banner.jpg)
+![program](img/sis.gif)
 
 ## Proposta
 
