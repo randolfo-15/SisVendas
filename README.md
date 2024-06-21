@@ -53,3 +53,16 @@ para simplificar seu ciclo de construção
 ## Inicie a construção da solução
 
 ![play](img/play.png)
+
+## Sobre o SisVendas
+
+Projeto dedicado para  disciplinas de LP e POO, focado em desenvolver um e-commerce.
+SisVendas – (Sistema de vendas) pretende simular o atendimento de um caixa de supermecado
+suportando o cadastro de  produtos como  frutas, comésticos, roupas,e produtos de limpeza
+O sistema é desenvolvido com Java Desktop,versão 17, utilizando a biblioteca Swing,e Sqlite.
+
+<div align='center'>
+
+![coin](img/coin.gif)
+
+</div>
