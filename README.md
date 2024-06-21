@@ -8,14 +8,17 @@
 
 ## Proposta
 
-LotoFacil é um programa que simula um sorteio de loteria
-você pode escolher quantos números quiser e testar sua sorte.
+Sisvendas é projeto simples que visa otimizar e organizar a vida de pequenos empreendedores
+oferecendo um ponto de venda(PDV), e um controle de estoque para produtos variados.
 
-## Minigames
-LotoFacil possui mais dois Minigames
-### Letra da Sorte:
 
-![letter](rec/images/game_letter.jpg)
+## Gestão de recursos
+
+SisVendas oferece uma interface intuitiva para o gerenciamento de produtos e usuários
+
+### Pesquisa por usuário
+
+![search](img/find.png)
 
 ### Par ou Impar:
 
