@@ -18,15 +18,19 @@ SisVendas oferece uma interface intuitiva para o gerenciamento de produtos e usu
 
 ### Pesquisa por usuário
 
-![search](img/find.png)
+![search](img/menu.png)
 
-### Par ou Impar:
+### Sobre o sistema:
 
-![par_impa](rec/images/game_prir.jpg)
+![info](img/info.png)
 
-### Todos esses games podem ser acessados na janela de menu:
+### PDV
 
-![Menu](rec/images/menu_main.jpg)
+![pdv](img/pdv.png)
+
+
+
+
 
 ## Instalação
 
