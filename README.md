@@ -1,6 +1,10 @@
 # SisVendas
 
+<div align='center'>
+
 ![program](img/sis.gif)
+
+</div>
 
 ## Proposta
 
